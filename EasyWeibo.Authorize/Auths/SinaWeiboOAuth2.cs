@@ -25,7 +25,7 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				return "https://api.weibo.com/oauth2/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}";
+				return string.Format("https://api.weibo.com/oauth2/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
 			}
 		}
 		public override string TokenUrl
