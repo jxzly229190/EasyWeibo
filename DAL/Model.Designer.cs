@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 
-namespace EasyWeibo.Model
+namespace EasyWeibo
 {
     #region 上下文
     

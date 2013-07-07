@@ -76,7 +76,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="easyadsModel.userinfo" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3720719401041666" IsExpanded="true" />
+        <EntityTypeShape EntityType="easyadsModel.userinfo" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
