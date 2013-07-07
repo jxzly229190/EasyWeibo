@@ -1,5 +1,5 @@
-set PWD=root
-set MYSQLPATH="C:\phpStudy\MySQL\bin"
+set PWD=
+set MYSQLPATH=
 set DBName=easyads
 set CP=%~dp0
 cd /d %MYSQLPATH%
