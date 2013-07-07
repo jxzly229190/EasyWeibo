@@ -19,12 +19,12 @@ namespace EnvHelper
 
 		public string AppKey
 		{
-			get { return string.Empty; }
+			get { return "1021550668"; }
 		}
 
 		public string AppSecret
 		{
-			get { return string.Empty; }
+			get { return "sandbox60cbf228fb159c5af78bd3195"; }
 		}
 	}
 }

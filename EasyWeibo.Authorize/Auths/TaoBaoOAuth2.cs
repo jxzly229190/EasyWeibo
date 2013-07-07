@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EasyWeibo.Authorize
 {
-	public class TaoBaoOAuth2:OAuth2Base
+	public class TaoBaoOAuth2 : OAuth2Base
 	{
 		public override OAuthServer server
 		{
@@ -25,7 +25,7 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				return string.Format("https://oauth.taobao.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}",this.AppKey,this.CallbackUrl,this.server);
+				return string.Format("https://oauth.taobao.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
 			}
 		}
 		public override string TokenUrl
@@ -33,6 +33,28 @@ namespace EasyWeibo.Authorize
 			get
 			{
 				return "https://oauth.taobao.com/token";
+			}
+		}
+
+		public override string AppKey
+		{
+			get
+			{
+				if (!Boolean.Parse(Tool.GetConfig("UseTaoBaoSandBox")))
+					return base.AppKey;
+				else
+					return Tool.GetConfig(server.ToString() + ".SandBoxAppKey");
+			}
+		}
+
+		public override string AppSercet
+		{
+			get
+			{
+				if (!Boolean.Parse(Tool.GetConfig("UseTaoBaoSandBox")))
+					return base.AppSercet;
+				else
+					return Tool.GetConfig(server.ToString() + ".SandBoxAppSercet");
 			}
 		}
 	}
