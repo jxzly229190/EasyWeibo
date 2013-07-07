@@ -12,10 +12,11 @@ namespace EasyWeibo.App.Controllers
         //
         // GET: /OAuth/
 
-		OAuth2Base ob = OAuth2Factory.TaoBaoAuther;
+		//OAuth2Base ob = OAuth2Factory.TaoBaoAuther;
+		IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
         public ActionResult Index()
         {
-			return View(ob);
+			return View(obDic);
         }
 
 		[HttpGet]
@@ -23,9 +24,9 @@ namespace EasyWeibo.App.Controllers
 		{
 			if (!string.IsNullOrEmpty(code))
 			{
-				if (this.ob.Authorize(code))
+				if (this.obDic[state].Authorize(code))
 				{
-					return ob.TokenResult;
+					return obDic[state].TokenResult;
 				}
 			}
 
