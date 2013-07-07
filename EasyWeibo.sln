@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.DAL", "EasyWeibo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.Authorize", "EasyWeibo.Authorize\EasyWeibo.Authorize.csproj", "{59C51133-3776-4127-ACB6-25D03BD65C3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopSdk", "taobao-sdk-net-online_standard-20130618-source\TopSdk.csproj", "{9C11CAE5-5188-4E71-825B-68FC3135728A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.BLL", "EasyWeibo.BLL\EasyWeibo.BLL.csproj", "{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{59C51133-3776-4127-ACB6-25D03BD65C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59C51133-3776-4127-ACB6-25D03BD65C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59C51133-3776-4127-ACB6-25D03BD65C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

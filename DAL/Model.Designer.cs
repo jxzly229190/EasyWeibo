@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 
-namespace EasyWeibo.Model
+namespace EasyWeibo
 {
     #region 上下文
     
@@ -120,7 +120,7 @@ namespace EasyWeibo.Model
         /// <param name="nick">Nick 属性的初始值。</param>
         /// <param name="authDate">AuthDate 属性的初始值。</param>
         /// <param name="lastLogin">LastLogin 属性的初始值。</param>
-        public static userinfo Createuserinfo(global::System.Int64 userId, global::System.String tB_UserId, global::System.String accessToken, global::System.String refreshToken, global::System.String nick, global::System.DateTime authDate, global::System.DateTime lastLogin)
+        public static userinfo Createuserinfo(global::System.Int16 userId, global::System.String tB_UserId, global::System.String accessToken, global::System.String refreshToken, global::System.String nick, global::System.DateTime authDate, global::System.DateTime lastLogin)
         {
             userinfo userinfo = new userinfo();
             userinfo.UserId = userId;
@@ -141,7 +141,7 @@ namespace EasyWeibo.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 UserId
+        public global::System.Int16 UserId
         {
             get
             {
@@ -159,8 +159,8 @@ namespace EasyWeibo.Model
                 }
             }
         }
-        private global::System.Int64 _UserId;
-        partial void OnUserIdChanging(global::System.Int64 value);
+        private global::System.Int16 _UserId;
+        partial void OnUserIdChanging(global::System.Int16 value);
         partial void OnUserIdChanged();
     
         /// <summary>

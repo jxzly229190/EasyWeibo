@@ -12,24 +12,24 @@ namespace EasyWeibo.App.Controllers
         //
         // GET: /OAuth/
 
-		OAuth2Base ob = OAuth2Factory.TaoBaoAuther;
+		//OAuth2Base ob = OAuth2Factory.TaoBaoAuther;
+		IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
         public ActionResult Index()
         {
-			return View(ob);
+			return View(obDic);
         }
 
 		[HttpGet]
-		public string GetAccessToken(string code, string state)
+		public ViewResult GetAccessToken(string code, string state)
 		{
 			if (!string.IsNullOrEmpty(code))
 			{
-				if (this.ob.Authorize(code))
+				if (this.obDic[state].Authorize(code))
 				{
-					return ob.TokenResult;
+					ViewData["session"] = Tool.GetJosnValue(this.obDic[state].TokenResult, "access_token");					 
 				}
 			}
-
-			return "授权失败";
+			return View();
 		}
     }
 }

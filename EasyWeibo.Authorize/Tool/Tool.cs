@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EasyWeibo.Authorize
 {
-	class Tool
+	public class Tool
 	{
 		/// <summary>
 		/// 截取参数,取不到值时返回""

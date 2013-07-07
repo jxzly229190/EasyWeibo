@@ -1,4 +1,4 @@
-﻿@model EasyWeibo.Authorize.OAuth2Base
+﻿@model Dictionary<string,EasyWeibo.Authorize.OAuth2Base>
 
 @{
     ViewBag.Title = "Index";
@@ -9,4 +9,7 @@
 
 <h2>Index</h2>
 
-<a href="@Model.OAuthUrl">淘宝认证</a>
+@foreach (var o in Model)
+{
+	<a href="@o.Value.OAuthUrl">@o.Key 认证</a>
+}

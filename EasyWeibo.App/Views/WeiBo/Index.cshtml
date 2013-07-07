@@ -1,0 +1,13 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" action="SendWeibo">
+	<div>微薄正文：@Html.TextArea("content");</div>
+	<div>图片URL：@Html.TextBox("url")</div>
+	@Html.Hidden("session", ViewData["session"]);
+	<button type="submit" title="Send" name="发送" />
+</form>
