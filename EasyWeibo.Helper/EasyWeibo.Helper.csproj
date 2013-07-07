@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}</ProjectGuid>
+    <ProjectGuid>{1B386F13-E16D-4228-8086-7B74DCB8979F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EasyWeibo.BLL</RootNamespace>
-    <AssemblyName>EasyWeibo.BLL</AssemblyName>
+    <RootNamespace>EasyWeibo.Helper</RootNamespace>
+    <AssemblyName>EasyWeibo.Helper</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,12 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetDimension.Weibo">
-      <HintPath>..\EasyWeibo.App\lib\NetDimension.Weibo.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\ThirdPartyDlls\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,24 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WeiboServiceBase.cs" />
-    <Compile Include="OAuthService.cs" />
+    <Compile Include="JsonObjectSerializerHelper.cs" />
+    <Compile Include="JsonSerializableBaseObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SinaWeiboService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DAL\EasyWeibo.Model.csproj">
-      <Project>{CC945456-937A-4E2C-8B20-92D97D2DDD54}</Project>
-      <Name>EasyWeibo.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EasyWeibo.Authorize\EasyWeibo.Authorize.csproj">
-      <Project>{59C51133-3776-4127-ACB6-25D03BD65C3A}</Project>
-      <Name>EasyWeibo.Authorize</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\taobao-sdk-net-online_standard-20130618-source\TopSdk.csproj">
-      <Project>{9C11CAE5-5188-4E71-825B-68FC3135728A}</Project>
-      <Name>TopSdk</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

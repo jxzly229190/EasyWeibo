@@ -20,20 +20,17 @@ namespace EasyWeibo.App.Controllers
         }
 
 		[HttpGet]
-		public ViewResult GetAccessToken(string code, string state)
+		public string GetAccessToken(string code, string state)
 		{
 			if (!string.IsNullOrEmpty(code))
 			{
 				if (this.obDic[state].Authorize(code))
 				{
-<<<<<<< HEAD
-					ViewData["session"] = Tool.GetJosnValue(this.obDic[state].TokenResult, "access_token");					 
-=======
 					return obDic[state].TokenResult;
->>>>>>> 17d906998a77b317a0e6b8e3bc8c276f3955a155
 				}
 			}
-			return View();
+
+			return "授权失败";
 		}
     }
 }
