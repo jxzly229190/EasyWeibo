@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-﻿	   
-=======
 ﻿@model string
-		   
->>>>>>> 17d906998a77b317a0e6b8e3bc8c276f3955a155
 @{
     ViewBag.Title = "GetAccessToken";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +8,7 @@
 @{if(ViewData.ContainsKey("session"))
   {
 	  <p>认证成功</p>
-	  <a href="../WeiBo/Index?session=@ViewData["session"]">点击发送微薄测试</a>
+	  <a href="../WeiBo/Index?session=@ViewData["session"]">点击发送微博测试</a>
   }
   else{	  
 		<p>认证失败</p>

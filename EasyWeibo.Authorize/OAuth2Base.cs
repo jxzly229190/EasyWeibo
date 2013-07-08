@@ -66,21 +66,21 @@ namespace EasyWeibo.Authorize
 		#endregion
 
 		#region WebConfig对应的配置【AppKey、AppSercet、CallbackUrl】
-		public string AppKey
+		public virtual string AppKey
 		{
 			get
 			{
 				return Tool.GetConfig(server.ToString() + ".AppKey");
 			}
 		}
-		public string AppSercet
+		public virtual string AppSercet
 		{
 			get
 			{
 				return Tool.GetConfig(server.ToString() + ".AppSercet");
 			}
 		}
-		public string CallbackUrl
+		public virtual string CallbackUrl
 		{
 			get
 			{

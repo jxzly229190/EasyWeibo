@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: easyads
 -- ------------------------------------------------------
--- Server version	5.5.17
+-- Server version	5.6.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,9 @@ CREATE TABLE `platforminfo` (
   `AuthDate` datetime NOT NULL,
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserId` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`,`UserId`),
+  KEY `UserId_idx` (`UserId`),
+  CONSTRAINT `PK_UserId` FOREIGN KEY (`UserId`) REFERENCES `userinfo` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -86,4 +88,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-08 23:02:58
+-- Dump completed on 2013-07-08 23:07:32
