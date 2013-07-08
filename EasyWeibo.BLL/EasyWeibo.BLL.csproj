@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetDimension.Weibo">
-      <HintPath>..\EasyWeibo.App\lib\NetDimension.Weibo.dll</HintPath>
+    <Reference Include="NetDimension.Weibo, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDlls\NetDimension.Weibo.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomException\WeiboException.cs" />
+    <Compile Include="Helper\ContextHelper.cs" />
     <Compile Include="WeiboServiceBase.cs" />
     <Compile Include="OAuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
