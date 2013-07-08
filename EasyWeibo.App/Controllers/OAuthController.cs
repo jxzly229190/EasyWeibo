@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EasyWeibo.Authorize;
+using EasyWeibo.Helper;
 
 namespace EasyWeibo.App.Controllers
 {
@@ -26,7 +27,7 @@ namespace EasyWeibo.App.Controllers
 			{
 				if (this.obDic[state].Authorize(code))
 				{
-					ViewData["session"] = Tool.GetJosnValue(this.obDic[state].TokenResult, "access_token");		
+					ViewData["session"] = StringParserHelper.GetJosnValue(this.obDic[state].TokenResult, "access_token");		
 				}
 			}
 			return View();
