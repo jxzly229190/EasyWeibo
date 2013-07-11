@@ -15,4 +15,9 @@ namespace EasyWeibo.BLL.CustomException
 	{
 		public string Message { set; get; }
 	}
+
+	public class NullWeiboSessionKeyException : Exception
+	{
+
+	}
 }
