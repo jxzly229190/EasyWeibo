@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EasyWeibo.Helper;
 
 namespace EasyWeibo.Authorize
 {
@@ -40,10 +41,10 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				if (!Boolean.Parse(Tool.GetConfig("UseTaoBaoSandBox")))
+				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
 					return base.AppKey;
 				else
-					return Tool.GetConfig(server.ToString() + ".SandBoxAppKey");
+					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppKey");
 			}
 		}
 
@@ -51,10 +52,10 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				if (!Boolean.Parse(Tool.GetConfig("UseTaoBaoSandBox")))
+				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
 					return base.AppSercet;
 				else
-					return Tool.GetConfig(server.ToString() + ".SandBoxAppSercet");
+					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppSercet");
 			}
 		}
 	}

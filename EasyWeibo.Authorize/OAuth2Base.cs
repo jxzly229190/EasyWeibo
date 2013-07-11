@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using EasyWeibo.Helper;
 
 namespace EasyWeibo.Authorize
 {
@@ -70,21 +71,21 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				return Tool.GetConfig(server.ToString() + ".AppKey");
+				return StringParserHelper.GetConfig(server.ToString() + ".AppKey");
 			}
 		}
 		public virtual string AppSercet
 		{
 			get
 			{
-				return Tool.GetConfig(server.ToString() + ".AppSercet");
+				return StringParserHelper.GetConfig(server.ToString() + ".AppSercet");
 			}
 		}
 		public virtual string CallbackUrl
 		{
 			get
 			{
-				return Tool.GetConfig(server.ToString() + ".CallbackUrl");
+				return StringParserHelper.GetConfig(server.ToString() + ".CallbackUrl");
 			}
 		}
 		#endregion
