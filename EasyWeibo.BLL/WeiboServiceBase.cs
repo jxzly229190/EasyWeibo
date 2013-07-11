@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NetDimension.Weibo;
 
 namespace EasyWeibo.BLL
 {
@@ -28,6 +29,12 @@ namespace EasyWeibo.BLL
 		/// </summary>
 		/// <param name="msgList">微薄内容列表</param>
 		public abstract void BatchSend(List<WeiboMessage> msgList);
+
+		/// <summary>
+		/// 验证微薄SesssionKey(即Access token)的有效性
+		/// </summary>
+		/// <returns></returns>
+		public abstract TokenResult VerifyAccessToken();
 	}
 
 	/// <summary>
