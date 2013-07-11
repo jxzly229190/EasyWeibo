@@ -8,6 +8,7 @@
 @{if(ViewData.ContainsKey("session"))
   {
 	  <p>认证成功</p>
+    <p>Welcome You, @Session["Nick"]</p>
 	  <a href="../WeiBo/Index?session=@ViewData["session"]">点击发送微博测试</a>
   }
   else{	  

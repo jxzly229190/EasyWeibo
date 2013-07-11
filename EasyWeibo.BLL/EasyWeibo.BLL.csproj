@@ -43,10 +43,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDlls\TopSdk.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomException\WeiboException.cs" />
     <Compile Include="Helper\ContextHelper.cs" />
+    <Compile Include="TaobaoService.cs" />
     <Compile Include="WeiboServiceBase.cs" />
     <Compile Include="OAuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,9 +66,9 @@
       <Project>{59C51133-3776-4127-ACB6-25D03BD65C3A}</Project>
       <Name>EasyWeibo.Authorize</Name>
     </ProjectReference>
-    <ProjectReference Include="..\taobao-sdk-net-online_standard-20130618-source\TopSdk.csproj">
-      <Project>{9C11CAE5-5188-4E71-825B-68FC3135728A}</Project>
-      <Name>TopSdk</Name>
+    <ProjectReference Include="..\EasyWeibo.Helper\EasyWeibo.Helper.csproj">
+      <Project>{1B386F13-E16D-4228-8086-7B74DCB8979F}</Project>
+      <Name>EasyWeibo.Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

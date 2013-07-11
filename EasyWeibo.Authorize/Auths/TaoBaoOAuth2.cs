@@ -8,6 +8,14 @@ namespace EasyWeibo.Authorize
 {
 	public class TaoBaoOAuth2 : OAuth2Base
 	{
+		private bool _isUseSandBox = false;
+		public bool IsUseSandBox
+		{
+			get
+			{
+				return _isUseSandBox;
+			}
+		}
 		public override OAuthServer server
 		{
 			get
@@ -26,7 +34,7 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+				if (!IsUseSandBox)
 					return string.Format("https://oauth.taobao.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
 				else
 					return string.Format("https://oauth.tbsandbox.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
@@ -36,7 +44,7 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+				if (!IsUseSandBox)
 					return "https://oauth.taobao.com/token";
 				else
 					return "https://oauth.tbsandbox.com/token";
@@ -47,7 +55,7 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+				if (!IsUseSandBox)
 					return base.AppKey;
 				else
 					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppKey");
@@ -58,11 +66,16 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+				if (!IsUseSandBox)
 					return base.AppSercet;
 				else
 					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppSercet");
 			}
+		}
+
+		public TaoBaoOAuth2()
+		{
+			_isUseSandBox = bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox"));
 		}
 	}
 }

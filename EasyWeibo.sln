@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.Model", "DAL\EasyWeibo.Model.csproj", "{CC945456-937A-4E2C-8B20-92D97D2DDD54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.IDAL", "IDAL\EasyWeibo.IDAL.csproj", "{6CECA497-D329-4E21-ADE6-A501A9292991}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.App", "EasyWeibo.App\EasyWeibo.App.csproj", "{86EAF2D2-B2AE-47CF-B745-52CAE7EE83DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.DAL", "EasyWeibo.DAL\EasyWeibo.DAL.csproj", "{41A938E1-C5F6-4111-BCC0-6ECE411441C9}"
@@ -27,10 +25,6 @@ Global
 		{CC945456-937A-4E2C-8B20-92D97D2DDD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC945456-937A-4E2C-8B20-92D97D2DDD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC945456-937A-4E2C-8B20-92D97D2DDD54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CECA497-D329-4E21-ADE6-A501A9292991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CECA497-D329-4E21-ADE6-A501A9292991}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CECA497-D329-4E21-ADE6-A501A9292991}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CECA497-D329-4E21-ADE6-A501A9292991}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86EAF2D2-B2AE-47CF-B745-52CAE7EE83DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86EAF2D2-B2AE-47CF-B745-52CAE7EE83DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86EAF2D2-B2AE-47CF-B745-52CAE7EE83DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
