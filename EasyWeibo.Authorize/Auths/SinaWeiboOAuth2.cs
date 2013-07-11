@@ -11,7 +11,7 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				return Helper.StringParserHelper.GetJosnValue(this.TokenResultJosn, "access_token");
+				return Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "access_token");
 			}
 		}
 

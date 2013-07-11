@@ -47,7 +47,7 @@ namespace EasyWeibo.Authorize
 		/// 首次请求时返回的Code
 		/// </summary>
 		/// 
-		public string TokenResultJosn { protected set; get; }
+		public string TokenResultJson { protected set; get; }
 		public abstract OAuthServer server
 		{
 			get;
@@ -133,7 +133,7 @@ namespace EasyWeibo.Authorize
 		{
 			if (!string.IsNullOrEmpty(code))
 			{
-				this.TokenResultJosn = GetToken("POST", code);//一次性返回数据。
+				this.TokenResultJson = GetToken("POST", code);//一次性返回数据。
 				return true;
 			}
 			return false;
