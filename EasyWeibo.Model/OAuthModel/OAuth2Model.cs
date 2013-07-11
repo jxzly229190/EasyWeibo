@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EasyWeibo.OAuthModel
+namespace EasyWeibo.Model
 {
 	class OAuth2Model
 	{		

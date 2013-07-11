@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.SessionState;
 using EasyWeibo.Authorize;
 using NetDimension.Weibo;
+using EasyWeibo.Model;
 
 namespace EasyWeibo.BLL
 {
@@ -48,11 +49,11 @@ namespace EasyWeibo.BLL
 
 		private Client InitializeSinaClient(HttpSessionState session)
 		{
-			if (session["sessionKey"] != null)//检查是否存在SessionKey，后续可能还要从数据库去取
+			if (session[EasyWeibo.Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] != null)//检查是否存在SessionKey，后续可能还要从数据库去取
 			{
 				OAuth2Base sinaAuth2 = new SinaWeiboOAuth2();
 				OAuth auth;
-				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSercet, session["sessionKey"].ToString(), null);
+				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSercet, session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName].ToString(), null);
 				Client sinaClient = new Client(auth);
 				return sinaClient;
 			}

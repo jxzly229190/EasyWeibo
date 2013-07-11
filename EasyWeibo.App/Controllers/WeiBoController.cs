@@ -13,28 +13,21 @@ namespace EasyWeibo.App.Controllers
         // GET: /WeiBo/
 
 		string access_key = string.Empty;
-        public ActionResult Index(string session)
+
+		BLL.WeiboServiceBase ws = new BLL.SinaWeiboService();
+        public ActionResult Index()
         {
-			this.access_key = session;
-			ViewData["session"] = session;
 			return View();
         }
 
 		public ActionResult SendWeibo(string content, string url, string session)
 		{
-			
-			OAuth oau=new OAuth("997311183","cf684c318d5c314ae6358309c06dcf17",session,null);
-			if (oau.VerifierAccessToken() == TokenResult.Success)
+			if (ws.VerifyAccessToken() == TokenResult.Success)
 			{
-				NetDimension.Weibo.Client client = new Client(oau);
-				var result = client.API.Entity.Statuses.Update(content);
-				if (result != null)
-				{
-					return View((object)"发送成功");
-				}
+				ws.Send(new Model.WeiboMessage() { Content = content, Url=url });
+				return View((object)"发送成功");
 			}
 			return View((object)"发送失败");
 		}
-
     }
 }

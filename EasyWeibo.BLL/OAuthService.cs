@@ -7,25 +7,28 @@ using Top.Api.Domain;
 
 namespace EasyWeibo.BLL
 {
-	class OAuthService
+	public class OAuthService
 	{
-
-		public User RegisterNewClient(OAuth2Base oa,string code)
+		public void RegisterPlatformSession(OAuth2Base oa,string code)
 		{
-			//if(!string.IsNullOrEmpty(code)&&oa!=null)
-			//{
-			//    if(oa.Authorize(code))
-			//    {
-			//        switch (oa.server)
-			//        {
-			//            case OAuthServer.TaoBao:
-			//                return 
-			//        }
-			//    }
-			//}
-
-			return new User();
+			if(!string.IsNullOrEmpty(code)&&oa!=null)
+			{
+			    if(oa.Authorize(code))
+			    {
+					switch (oa.server)
+					{
+						case OAuthServer.SinaWeiBo:
+							Helper.ContextHelper.CurrentSession[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = oa.AccessToken;
+							break;
+						default:
+							Helper.ContextHelper.CurrentSession[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = oa.AccessToken;
+							break;
+					}
+			    }
+			}
 		}
+
+
 
 
 	}

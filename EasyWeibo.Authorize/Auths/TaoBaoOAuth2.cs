@@ -43,6 +43,11 @@ namespace EasyWeibo.Authorize
 			}
 		}
 
+		public override string AccessToken
+		{
+			get { throw new NotImplementedException(); }
+		}
+
 		public override string AppKey
 		{
 			get

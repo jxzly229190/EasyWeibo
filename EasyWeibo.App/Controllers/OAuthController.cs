@@ -25,10 +25,8 @@ namespace EasyWeibo.App.Controllers
 		{
 			if (!string.IsNullOrEmpty(code))
 			{
-				if (this.obDic[state].Authorize(code))
-				{
-					ViewData["session"] = StringParserHelper.GetJosnValue(this.obDic[state].TokenResult, "access_token");		
-				}
+				BLL.OAuthService authService = new BLL.OAuthService();
+				authService.RegisterPlatformSession(obDic[state], code);				
 			}
 			return View();
 		}
