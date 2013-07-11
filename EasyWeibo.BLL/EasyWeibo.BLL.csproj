@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomException\WeiboException.cs" />
-    <Compile Include="Helper\ContextHelper.cs" />
     <Compile Include="TaobaoService.cs" />
     <Compile Include="WeiboServiceBase.cs" />
     <Compile Include="OAuthService.cs" />
@@ -58,7 +57,7 @@
     <Compile Include="SinaWeiboService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\EasyWeibo.Model.csproj">
+    <ProjectReference Include="..\EasyWeibo.Model\EasyWeibo.Model.csproj">
       <Project>{CC945456-937A-4E2C-8B20-92D97D2DDD54}</Project>
       <Name>EasyWeibo.Model</Name>
     </ProjectReference>
@@ -69,6 +68,7 @@
     <ProjectReference Include="..\EasyWeibo.Helper\EasyWeibo.Helper.csproj">
       <Project>{1B386F13-E16D-4228-8086-7B74DCB8979F}</Project>
       <Name>EasyWeibo.Helper</Name>
+    </ProjectReference>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

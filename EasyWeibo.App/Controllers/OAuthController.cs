@@ -33,6 +33,8 @@ namespace EasyWeibo.App.Controllers
 		{
 			if (!string.IsNullOrEmpty(code))
 			{
+				BLL.OAuthService authService = new BLL.OAuthService();
+				authService.RegisterPlatformSession(obDic[state], code);				
 				string sessionKey = string.Empty;
 				if (!bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
 				{

@@ -8,8 +8,8 @@
     <ProjectGuid>{CC945456-937A-4E2C-8B20-92D97D2DDD54}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EasyWeibo</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>EasyWeibo.Model</RootNamespace>
+    <AssemblyName>EasyWeibo.Model</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

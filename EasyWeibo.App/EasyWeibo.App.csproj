@@ -161,6 +161,10 @@
       <Project>{1B386F13-E16D-4228-8086-7B74DCB8979F}</Project>
       <Name>EasyWeibo.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EasyWeibo.Model\EasyWeibo.Model.csproj">
+      <Project>{CC945456-937A-4E2C-8B20-92D97D2DDD54}</Project>
+      <Name>EasyWeibo.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\OAuth\Index.cshtml" />

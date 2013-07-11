@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace EasyWeibo.BLL.Helper
+namespace EasyWeibo.Helper
 {
-	public static class ContextHelper
+	public class ContextHelper
 	{
 		public static System.Web.SessionState.HttpSessionState CurrentSession
 		{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EasyWeibo.Model;
 using NetDimension.Weibo;
+using EasyWeibo.Model;
 
 namespace EasyWeibo.BLL
 {

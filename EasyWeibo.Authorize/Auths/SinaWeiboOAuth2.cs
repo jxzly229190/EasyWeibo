@@ -7,6 +7,14 @@ namespace EasyWeibo.Authorize
 {
 	public class SinaWeiboOAuth2:OAuth2Base
 	{
+		public override string AccessToken
+		{
+			get
+			{
+				return Helper.StringParserHelper.GetJosnValue(this.TokenResultJosn, "access_token");
+			}
+		}
+
 		public override OAuthServer server
 		{
 			get
