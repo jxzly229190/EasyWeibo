@@ -26,14 +26,20 @@ namespace EasyWeibo.Authorize
 		{
 			get
 			{
-				return string.Format("https://oauth.taobao.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
+				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+					return string.Format("https://oauth.taobao.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
+				else
+					return string.Format("https://oauth.tbsandbox.com/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
 			}
 		}
 		public override string TokenUrl
 		{
 			get
 			{
-				return "https://oauth.taobao.com/token";
+				if (!Boolean.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+					return "https://oauth.taobao.com/token";
+				else
+					return "https://oauth.tbsandbox.com/token";
 			}
 		}
 
