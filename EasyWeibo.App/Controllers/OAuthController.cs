@@ -45,7 +45,7 @@ namespace EasyWeibo.App.Controllers
 					sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
 				}
 
-				ViewData["session"] = sessionKey;
+				Session["session"] = sessionKey;
 				User user = tbService.GetSellerUserInfo(sessionKey);
 				Session["Nick"] = user.Nick;
 			}
