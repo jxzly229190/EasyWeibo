@@ -21,10 +21,6 @@ namespace EasyWeibo.BLL
 			    }
 			}
 		}
-
-
-
-
 	}
 
 }

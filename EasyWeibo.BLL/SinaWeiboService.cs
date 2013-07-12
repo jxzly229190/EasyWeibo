@@ -9,11 +9,11 @@ namespace EasyWeibo.BLL
 	public class SinaWeiboService:WeiboServiceBase
 	{
 		Client sinaClient;
-		HttpSessionState session;
-		public SinaWeiboService()
+		private string sessionKey;
+		public SinaWeiboService(string sessionKey)
 		{
-			session = Helper.ContextHelper.CurrentSession;
-			sinaClient = InitializeSinaClient(session);
+			this.sessionKey = sessionKey;
+			sinaClient = InitializeSinaClient();
 		}
 
 		public override void Send(WeiboMessage message)
@@ -44,13 +44,13 @@ namespace EasyWeibo.BLL
 			}
 		}
 
-		private Client InitializeSinaClient(HttpSessionState session)
+		private Client InitializeSinaClient()
 		{
-			if (session[EasyWeibo.Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] != null)//检查是否存在SessionKey，后续可能还要从数据库去取
+			if (!string.IsNullOrEmpty(sessionKey))//检查是否存在SessionKey，后续可能还要从数据库去取
 			{
 				OAuth2Base sinaAuth2 = new SinaWeiboOAuth2();
 				OAuth auth;
-				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSercet, session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName].ToString(), null);
+				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSercet, sessionKey, null);
 				Client sinaClient = new Client(auth);
 				return sinaClient;
 			}
