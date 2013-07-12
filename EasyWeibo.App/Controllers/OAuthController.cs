@@ -9,10 +9,9 @@ namespace EasyWeibo.App.Controllers
 	public class OAuthController : Controller
 	{
 		private IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
-		private TaobaoService tbService;
 		public OAuthController()
 		{
-			tbService = new TaobaoService();
+
 		}
 		//
 		// GET: /OAuth/
@@ -54,9 +53,6 @@ namespace EasyWeibo.App.Controllers
 							break;
 					}
 				}
-				ViewData["session"] = sessionKey;
-				User user = tbService.GetSellerUserInfo(sessionKey);
-				Session["Nick"] = user.Nick;
 			}
 
 			return View();
