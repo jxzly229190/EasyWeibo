@@ -149,10 +149,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EasyWeibo.Authorize\EasyWeibo.Authorize.csproj">
-      <Project>{59C51133-3776-4127-ACB6-25D03BD65C3A}</Project>
-      <Name>EasyWeibo.Authorize</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EasyWeibo.BLL\EasyWeibo.BLL.csproj">
       <Project>{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}</Project>
       <Name>EasyWeibo.BLL</Name>

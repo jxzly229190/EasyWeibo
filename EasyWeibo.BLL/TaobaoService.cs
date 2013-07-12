@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Top.Api.Domain;
-using Top.Api;
-using Top.Api.Request;
-using EasyWeibo.Authorize;
-using Top.Api.Response;
+﻿using System.Collections.Generic;
+using EasyWeibo.DAL;
 using EasyWeibo.Helper;
+using EasyWeibo.Model;
+using Top.Api;
+using Top.Api.Domain;
+using Top.Api.Request;
+using Top.Api.Response;
 
 namespace EasyWeibo.BLL
 {
@@ -15,6 +13,7 @@ namespace EasyWeibo.BLL
 	{
 		private TaoBaoOAuth2 authModel;
 		private IEnvConstHelper envHelper;
+
 		public TaobaoService()
 		{
 			authModel = new TaoBaoOAuth2();
@@ -39,5 +38,7 @@ namespace EasyWeibo.BLL
 			else
 				return new User();
 		}
+
+		
 	}
 }

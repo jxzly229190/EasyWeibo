@@ -14,5 +14,7 @@ namespace EasyWeibo.App.Controllers
 
 			return View();
 		}
+
+
 	}
 }

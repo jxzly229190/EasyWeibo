@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using EasyWeibo.Helper;
 
-namespace EasyWeibo.Authorize
+namespace EasyWeibo.BLL
 {
 	public abstract class OAuth2Base
 	{
@@ -48,7 +48,7 @@ namespace EasyWeibo.Authorize
 		/// </summary>
 		/// 
 		public string TokenResultJson { protected set; get; }
-		public abstract OAuthServer server
+		public abstract Mappings.PlatForm server
 		{
 			get;
 		}
@@ -164,42 +164,5 @@ namespace EasyWeibo.Authorize
 		}
 		#endregion
 	}
-	/// <summary>
-	/// 提供授权的服务商
-	/// </summary>
-	public enum OAuthServer
-	{
-		/// <summary>
-		/// 新浪微博
-		/// </summary>
-		SinaWeiBo,
-		/// <summary>
-		/// 腾讯QQ
-		/// </summary>
-		QQ,
-		/// <summary>
-		/// 淘宝网
-		/// </summary>
-		TaoBao,
-		/// <summary>
-		/// 人人网（未支持）
-		/// </summary>
-		RenRen,
-		/// <summary>
-		/// 腾讯微博（未支持）
-		/// </summary>
-		QQWeiBo,
-		/// <summary>
-		/// 开心网（未支持）
-		/// </summary>
-		KaiXin,
-		/// <summary>
-		/// 飞信（未支持）
-		/// </summary>
-		FeiXin,
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-	}
+	
 }

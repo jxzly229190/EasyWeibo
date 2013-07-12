@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using EasyWeibo.Authorize;
+using EasyWeibo.BLL;
 using EasyWeibo.Helper;
 using Top.Api.Domain;
-using EasyWeibo.BLL;
 
 namespace EasyWeibo.App.Controllers
 {
@@ -54,7 +50,6 @@ namespace EasyWeibo.App.Controllers
 				Session["Nick"] = user.Nick;
 			}
 
-			
 			return View();
 		}
 	}

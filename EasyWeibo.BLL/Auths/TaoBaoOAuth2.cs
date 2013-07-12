@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using EasyWeibo.Helper;
+using EasyWeibo.BLL;
 
-namespace EasyWeibo.Authorize
+namespace EasyWeibo.BLL
 {
 	public class TaoBaoOAuth2 : OAuth2Base
 	{
@@ -16,11 +14,11 @@ namespace EasyWeibo.Authorize
 				return _isUseSandBox;
 			}
 		}
-		public override OAuthServer server
+		public override Mappings.PlatForm server
 		{
 			get
 			{
-				return OAuthServer.TaoBao;
+				return Mappings.PlatForm.TaoBao;
 			}
 		}
 		public override string ImgUrl

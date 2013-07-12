@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EasyWeibo.Authorize;
-using Top.Api.Domain;
-
+﻿using EasyWeibo.Helper;
 namespace EasyWeibo.BLL
 {
 	public class OAuthService
@@ -17,7 +11,7 @@ namespace EasyWeibo.BLL
 			    {
 					switch (oa.server)
 					{
-						case OAuthServer.SinaWeiBo:
+						case Mappings.PlatForm.SinaWeiBo:
 							Helper.ContextHelper.CurrentSession[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = oa.AccessToken;
 							break;
 						default:

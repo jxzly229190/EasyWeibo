@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.SessionState;
-using EasyWeibo.Authorize;
 using EasyWeibo.Model;
 using NetDimension.Weibo;
-using EasyWeibo.BLL.CustomException;
 
 namespace EasyWeibo.BLL
 {
