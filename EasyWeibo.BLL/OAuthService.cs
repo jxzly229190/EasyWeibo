@@ -12,10 +12,10 @@ namespace EasyWeibo.BLL
 					switch (oa.server)
 					{
 						case Mappings.PlatForm.SinaWeiBo:
-							Helper.ContextHelper.CurrentSession[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = oa.AccessToken;
+							//todo:保存数据进入数据库或者Cache中
 							break;
 						default:
-							Helper.ContextHelper.CurrentSession[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = oa.AccessToken;
+							//todo:保存数据进入数据库或者Cache中
 							break;
 					}
 			    }

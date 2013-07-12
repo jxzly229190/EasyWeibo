@@ -14,7 +14,7 @@ namespace EasyWeibo.App.Controllers
 
 		string access_key = string.Empty;
 
-		BLL.WeiboServiceBase ws = new BLL.SinaWeiboService();
+		BLL.WeiboServiceBase ws;
         public ActionResult Index()
         {
 			return View();
@@ -22,6 +22,7 @@ namespace EasyWeibo.App.Controllers
 
 		public ActionResult SendWeibo(string content, string url, string session)
 		{
+			ws = new BLL.SinaWeiboService(Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName].ToString());
 			if (ws.VerifyAccessToken() == TokenResult.Success)
 			{
 				ws.Send(new Model.WeiboMessage() { Content = content, Url=url });
