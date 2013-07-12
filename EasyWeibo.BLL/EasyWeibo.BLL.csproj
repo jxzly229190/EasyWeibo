@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,7 +50,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auths\OAuth2Base.cs" />
+    <Compile Include="Auths\OAuth2Factory.cs" />
+    <Compile Include="Auths\SinaWeiboOAuth2.cs" />
+    <Compile Include="Auths\TaoBaoOAuth2.cs" />
     <Compile Include="CustomException\WeiboException.cs" />
+    <Compile Include="PlatFormInfoService.cs" />
     <Compile Include="TaobaoService.cs" />
     <Compile Include="WeiboServiceBase.cs" />
     <Compile Include="OAuthService.cs" />
@@ -57,13 +63,13 @@
     <Compile Include="SinaWeiboService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EasyWeibo.DAL\EasyWeibo.DAL.csproj">
+      <Project>{41A938E1-C5F6-4111-BCC0-6ECE411441C9}</Project>
+      <Name>EasyWeibo.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EasyWeibo.Model\EasyWeibo.Model.csproj">
       <Project>{CC945456-937A-4E2C-8B20-92D97D2DDD54}</Project>
       <Name>EasyWeibo.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EasyWeibo.Authorize\EasyWeibo.Authorize.csproj">
-      <Project>{59C51133-3776-4127-ACB6-25D03BD65C3A}</Project>
-      <Name>EasyWeibo.Authorize</Name>
     </ProjectReference>
     <ProjectReference Include="..\EasyWeibo.Helper\EasyWeibo.Helper.csproj">
       <Project>{1B386F13-E16D-4228-8086-7B74DCB8979F}</Project>

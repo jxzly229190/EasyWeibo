@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using EasyWeibo.Helper;
 
-namespace EasyWeibo.Authorize
+namespace EasyWeibo.BLL
 {
 	public class OAuth2Factory
 	{		
@@ -40,9 +39,9 @@ namespace EasyWeibo.Authorize
 				if (_ServerList == null)
 				{
 					_ServerList = new Dictionary<string, OAuth2Base>(StringComparer.OrdinalIgnoreCase);
-					_ServerList.Add(OAuthServer.SinaWeiBo.ToString(), new SinaWeiboOAuth2());//新浪微博
+					_ServerList.Add(Mappings.PlatForm.SinaWeiBo.ToString(), new SinaWeiboOAuth2());//新浪微博
 					//_ServerList.Add(OAuthServer.QQ.ToString(), new QQOAuth());//QQ微博
-					_ServerList.Add(OAuthServer.TaoBao.ToString(), new TaoBaoOAuth2());//淘宝
+					_ServerList.Add(Mappings.PlatForm.TaoBao.ToString(), new TaoBaoOAuth2());//淘宝
 				}
 				return _ServerList;
 			}

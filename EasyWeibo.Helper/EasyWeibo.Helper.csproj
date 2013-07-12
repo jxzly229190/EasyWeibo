@@ -49,6 +49,7 @@
     <Compile Include="IEnvConstHelper.cs" />
     <Compile Include="JsonObjectSerializerHelper.cs" />
     <Compile Include="JsonSerializableBaseObject.cs" />
+    <Compile Include="Mappings.cs" />
     <Compile Include="PlatformSessionKeyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SandboxEnvConstHelper.cs" />
