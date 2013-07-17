@@ -30,7 +30,7 @@ namespace EasyWeibo.App.Controllers
 			if (!string.IsNullOrEmpty(code))
 			{			
 				string sessionKey = string.Empty;
-				if (obDic[state].server == EasyWeibo.Helper.Mappings.PlatForm.TaoBao && bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+				if (obDic[state].server == Mappings.PlatForm.TaoBao && bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
 				{
 					sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
 				}
@@ -41,20 +41,20 @@ namespace EasyWeibo.App.Controllers
 					sessionKey = obDic[state].AccessToken;
 					switch (obDic[state].server)
 					{
-						case EasyWeibo.Helper.Mappings.PlatForm.SinaWeiBo:
+						case Mappings.PlatForm.SinaWeiBo:
 							Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
 							break;
-						case EasyWeibo.Helper.Mappings.PlatForm.TaoBao:
+						case Mappings.PlatForm.TaoBao:
 							Session[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = sessionKey;
 							break;
-						case EasyWeibo.Helper.Mappings.PlatForm.QQWeiBo:
+						case Mappings.PlatForm.QQWeiBo:
 							Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = sessionKey;
 							break;
 						default:
 							break;
 					}
 				}
-				ViewData["session"] = sessionKey;
+				Session["session"] = sessionKey;
 				User user = tbService.GetSellerUserInfo(sessionKey);
 				Session["Nick"] = user.Nick;
 			}
