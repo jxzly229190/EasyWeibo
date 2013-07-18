@@ -8,7 +8,7 @@ namespace EasyWeibo.App.Controllers
 {
 	public class OAuthController : Controller
 	{
-		private IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
+		private readonly IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
 		public OAuthController()
 		{
 
@@ -27,15 +27,15 @@ namespace EasyWeibo.App.Controllers
 		public ViewResult GetAccessToken(string code, string state)
 		{
 			if (!string.IsNullOrEmpty(code))
-			{			
-				string sessionKey = string.Empty;
+			{
+				string sessionKey;
 				if (obDic[state].Server == EasyWeibo.Helper.Mappings.PlatForm.TaoBao && bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
 				{
 					sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
 				}
 				else
 				{
-					BLL.OAuthService authService = new BLL.OAuthService();
+					var authService = new BLL.OAuthService();
 					authService.RegisterPlatformSession(obDic[state], code);
 					sessionKey = obDic[state].AccessToken;
 					switch (obDic[state].Server)
