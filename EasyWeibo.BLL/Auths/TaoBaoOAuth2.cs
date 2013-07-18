@@ -51,7 +51,7 @@ namespace EasyWeibo.BLL
 
 		public override string AccessToken
 		{
-			get { throw new NotImplementedException(); }
+			get { return Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "access_token"); }
 		}
 
 		public override string AppKey
@@ -67,12 +67,8 @@ namespace EasyWeibo.BLL
 
 		public override string AppSercet
 		{
-			get
-			{
-				if (!IsUseSandBox)
-					return base.AppSercet;
-				else
-					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppSercet");
+			get {
+				return IsUseSandBox ? StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppSercet") : base.AppSercet;
 			}
 		}
 
