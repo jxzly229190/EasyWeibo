@@ -17,10 +17,12 @@ namespace EasyWeibo.BLL
 			Wc.Headers.Add("Pragma", "no-cache");
 		}
 		#region 基础属性
+
 		/// <summary>
-		/// 返回的开放ID。
+		/// 返回的开放UserID。
 		/// </summary>
-		public string OpenId = string.Empty;
+		public abstract string PlatformUId { get; }
+
 		/// <summary>
 		/// 访问的Token
 		/// </summary>
@@ -28,27 +30,31 @@ namespace EasyWeibo.BLL
 		{
 			get;
 		}
-
+		
+		/// <summary>
+		/// 获取Refresh Token(新浪微博暂时还不支持）
+		/// </summary>
 		public abstract string RefreshToken { get; } 
 
 		/// <summary>
-		/// 过期时间
+		/// 过期时间（目前还不支持）
 		/// </summary>
 		public DateTime ExpiresTime;
 
+		/*
 		/// <summary>
-		/// 第三方账号昵称
+		/// 第三方账号头像地址（目前不支持）
 		/// </summary>
-		public string NickName = string.Empty;
-
-		/// <summary>
-		/// 第三方账号头像地址
-		/// </summary>
-		public string HeadUrl = string.Empty;
+		///public string HeadUrl = string.Empty;
 		/// <summary>
 		/// 首次请求时返回的Code
 		/// </summary>
 		/// 
+		*/
+
+		/// <summary>
+		/// 获取Token结果的Json格式数据
+		/// </summary>
 		public string TokenResultJson { protected set; get; }
 		public abstract Mappings.PlatForm Server
 		{

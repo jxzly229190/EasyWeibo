@@ -49,6 +49,11 @@ namespace EasyWeibo.BLL
 			}
 		}
 
+		public override string PlatformUId
+		{
+			get { return Helper.StringParserHelper.GetJosnValue(TokenResultJson, "taobao_user_id"); }
+		}
+
 		public override string AccessToken
 		{
 			get { return Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "access_token"); }
@@ -67,7 +72,8 @@ namespace EasyWeibo.BLL
 
 		public override string AppSecret
 		{
-			get {
+			get 
+			{
 				return IsUseSandBox ? StringParserHelper.GetConfig(Server.ToString() + ".SandBoxAppSercet") : base.AppSecret;
 			}
 		}
@@ -82,6 +88,7 @@ namespace EasyWeibo.BLL
 					return StringParserHelper.GetConfig(Server.ToString() + ".SandBoxBaseUrl");
 			}
 		}
+
 		public TaoBaoOAuth2()
 		{
 			_isUseSandBox = bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox"));

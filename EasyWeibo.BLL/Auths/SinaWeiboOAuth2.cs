@@ -4,6 +4,11 @@ namespace EasyWeibo.BLL
 {
 	public class SinaWeiboOAuth2:OAuth2Base
 	{
+		public override string PlatformUId
+		{
+			get { return Helper.StringParserHelper.GetJosnValue(TokenResultJson, "uid"); }
+		}
+
 		public override string AccessToken
 		{
 			get
