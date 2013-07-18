@@ -10,7 +10,7 @@ namespace EasyWeibo.App.Controllers
 {
 	public class OAuthController : Controller
 	{
-		//start URL: http://127.0.0.1:1472/OAuth/GetAccessToken?code=jDEeshF0i0SPPJKI1CoGoFD12051&state=TaoBao
+		//start SandBox URL: http://127.0.0.1:1472/OAuth/GetAccessToken?code=jDEeshF0i0SPPJKI1CoGoFD12051&state=TaoBao
 		private readonly IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
 		private TaobaoService tbService;
 		public OAuthController()
@@ -58,7 +58,6 @@ namespace EasyWeibo.App.Controllers
 					}
 					
 					info.AccessToken = sessionKey;
-
 					if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
 					{
 						info.RefreshToken = sessionKey;
