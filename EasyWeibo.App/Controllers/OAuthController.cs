@@ -54,6 +54,7 @@ namespace EasyWeibo.App.Controllers
 						info = new userinfo();
 						info.Nick = user.Nick;
 						info.TB_UserId = user.UserId.ToString();
+						info.AuthDate = DateTime.Now;
 					}
 					
 					info.AccessToken = sessionKey;

@@ -4,11 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="easyadsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="easyadsModelStoreContainer">
-          <EntitySet Name="platforminfo" EntityType="easyadsModel.Store.platforminfo" store:Type="Tables" Schema="easyads" />
-          <EntitySet Name="userinfo" EntityType="easyadsModel.Store.userinfo" store:Type="Tables" Schema="easyads" />
-          <AssociationSet Name="PK_UserId" Association="easyadsModel.Store.PK_UserId">
+      <Schema Namespace="EasyadsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EasyadsModelStoreContainer">
+          <EntitySet Name="platforminfo" EntityType="EasyadsModel.Store.platforminfo" store:Type="Tables" Schema="easyads" />
+          <EntitySet Name="userinfo" EntityType="EasyadsModel.Store.userinfo" store:Type="Tables" Schema="easyads" />
+          <AssociationSet Name="PK_UserId" Association="EasyadsModel.Store.PK_UserId">
             <End Role="userinfo" EntitySet="userinfo" />
             <End Role="platforminfo" EntitySet="platforminfo" />
           </AssociationSet>
@@ -39,10 +39,11 @@
           <Property Name="Nick" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="LastLogin" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ExpireTime" Type="datetime" Nullable="false" />
+          <Property Name="AuthDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="PK_UserId">
-          <End Role="userinfo" Type="easyadsModel.Store.userinfo" Multiplicity="1" />
-          <End Role="platforminfo" Type="easyadsModel.Store.platforminfo" Multiplicity="*" />
+          <End Role="userinfo" Type="EasyadsModel.Store.userinfo" Multiplicity="1" />
+          <End Role="platforminfo" Type="EasyadsModel.Store.platforminfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="userinfo">
               <PropertyRef Name="UserId" />
@@ -56,11 +57,11 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="easyadsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="EasyadsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="EasyadsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="platforminfo" EntityType="easyadsModel.platforminfo" />
-          <EntitySet Name="userinfo" EntityType="easyadsModel.userinfo" />
-          <AssociationSet Name="PK_UserId" Association="easyadsModel.PK_UserId">
+          <EntitySet Name="platforminfo" EntityType="EasyadsModel.platforminfo" />
+          <EntitySet Name="userinfo" EntityType="EasyadsModel.userinfo" />
+          <AssociationSet Name="PK_UserId" Association="EasyadsModel.PK_UserId">
             <End Role="userinfo" EntitySet="userinfo" />
             <End Role="platforminfo" EntitySet="platforminfo" />
           </AssociationSet>
@@ -79,7 +80,7 @@
           <Property Name="AuthDate" Type="DateTime" Nullable="false" />
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="userinfo" Relationship="easyadsModel.PK_UserId" FromRole="platforminfo" ToRole="userinfo" />
+          <NavigationProperty Name="userinfo" Relationship="EasyadsModel.PK_UserId" FromRole="platforminfo" ToRole="userinfo" />
         </EntityType>
         <EntityType Name="userinfo">
           <Key>
@@ -92,11 +93,12 @@
           <Property Name="Nick" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
           <Property Name="LastLogin" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ExpireTime" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="platforminfo" Relationship="easyadsModel.PK_UserId" FromRole="userinfo" ToRole="platforminfo" />
+          <Property Name="AuthDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="platforminfo" Relationship="EasyadsModel.PK_UserId" FromRole="userinfo" ToRole="platforminfo" />
         </EntityType>
         <Association Name="PK_UserId">
-          <End Role="userinfo" Type="easyadsModel.userinfo" Multiplicity="1" />
-          <End Role="platforminfo" Type="easyadsModel.platforminfo" Multiplicity="*" />
+          <End Role="userinfo" Type="EasyadsModel.userinfo" Multiplicity="1" />
+          <End Role="platforminfo" Type="EasyadsModel.platforminfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="userinfo">
               <PropertyRef Name="UserId" />
@@ -111,8 +113,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="easyadsModelStoreContainer" CdmEntityContainer="EasyadsEntities">
-          <EntitySetMapping Name="platforminfo"><EntityTypeMapping TypeName="easyadsModel.platforminfo"><MappingFragment StoreEntitySet="platforminfo">
+        <EntityContainerMapping StorageEntityContainer="EasyadsModelStoreContainer" CdmEntityContainer="EasyadsEntities">
+          <EntitySetMapping Name="platforminfo"><EntityTypeMapping TypeName="EasyadsModel.platforminfo"><MappingFragment StoreEntitySet="platforminfo">
             <ScalarProperty Name="SessionKey" ColumnName="SessionKey" />
             <ScalarProperty Name="Refresh_token" ColumnName="Refresh_token" />
             <ScalarProperty Name="Nick" ColumnName="Nick" />
@@ -123,7 +125,7 @@
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="UserId" ColumnName="UserId" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="userinfo"><EntityTypeMapping TypeName="easyadsModel.userinfo"><MappingFragment StoreEntitySet="userinfo">
+          <EntitySetMapping Name="userinfo"><EntityTypeMapping TypeName="EasyadsModel.userinfo"><MappingFragment StoreEntitySet="userinfo">
             <ScalarProperty Name="UserId" ColumnName="UserId" />
             <ScalarProperty Name="TB_UserId" ColumnName="TB_UserId" />
             <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
@@ -131,6 +133,7 @@
             <ScalarProperty Name="Nick" ColumnName="Nick" />
             <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
             <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
+            <ScalarProperty Name="AuthDate" ColumnName="AuthDate" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
@@ -153,11 +156,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="easyadsModel.platforminfo" Width="1.5" PointX="3" PointY="1" Height="2.9251310221354165" IsExpanded="true" />
-        <EntityTypeShape EntityType="easyadsModel.userinfo" Width="1.5" PointX="0.75" PointY="1.125" Height="2.5430916341145826" IsExpanded="true" />
-        <AssociationConnector Association="easyadsModel.PK_UserId" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.3965458170572913" />
-          <ConnectorPoint PointX="3" PointY="2.3965458170572913" />
+        <EntityTypeShape EntityType="EasyadsModel.platforminfo" Width="1.5" PointX="3" PointY="1" Height="2.9251310221354165" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyadsModel.userinfo" Width="1.5" PointX="0.75" PointY="1.125" Height="2.7341113281249996" IsExpanded="true" />
+        <AssociationConnector Association="EasyadsModel.PK_UserId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.4920556640625" />
+          <ConnectorPoint PointX="3" PointY="2.4920556640625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

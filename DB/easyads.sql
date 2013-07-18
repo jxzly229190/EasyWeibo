@@ -62,8 +62,9 @@ CREATE TABLE `userinfo` (
   `Nick` varchar(64) NOT NULL,
   `LastLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次登录服务日期',
   `ExpireTime` datetime NOT NULL,
+  `AuthDate` datetime NOT NULL,
   PRIMARY KEY (`UserId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=gbk;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,4 +89,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-19  0:24:00
+-- Dump completed on 2013-07-19  0:50:14

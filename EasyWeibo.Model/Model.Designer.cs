@@ -18,7 +18,7 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("easyadsModel", "PK_UserId", "userinfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EasyWeibo.Model.userinfo), "platforminfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EasyWeibo.Model.platforminfo), true)]
+[assembly: EdmRelationshipAttribute("EasyadsModel", "PK_UserId", "userinfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EasyWeibo.Model.userinfo), "platforminfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EasyWeibo.Model.platforminfo), true)]
 
 #endregion
 
@@ -132,7 +132,7 @@ namespace EasyWeibo.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="easyadsModel", Name="platforminfo")]
+    [EdmEntityTypeAttribute(NamespaceName="EasyadsModel", Name="platforminfo")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class platforminfo : EntityObject
@@ -401,16 +401,16 @@ namespace EasyWeibo.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("easyadsModel", "PK_UserId", "userinfo")]
+        [EdmRelationshipNavigationPropertyAttribute("EasyadsModel", "PK_UserId", "userinfo")]
         public userinfo userinfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("easyadsModel.PK_UserId", "userinfo").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("EasyadsModel.PK_UserId", "userinfo").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("easyadsModel.PK_UserId", "userinfo").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("EasyadsModel.PK_UserId", "userinfo").Value = value;
             }
         }
         /// <summary>
@@ -422,13 +422,13 @@ namespace EasyWeibo.Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("easyadsModel.PK_UserId", "userinfo");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("EasyadsModel.PK_UserId", "userinfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<userinfo>("easyadsModel.PK_UserId", "userinfo", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<userinfo>("EasyadsModel.PK_UserId", "userinfo", value);
                 }
             }
         }
@@ -439,7 +439,7 @@ namespace EasyWeibo.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="easyadsModel", Name="userinfo")]
+    [EdmEntityTypeAttribute(NamespaceName="EasyadsModel", Name="userinfo")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class userinfo : EntityObject
@@ -456,7 +456,8 @@ namespace EasyWeibo.Model
         /// <param name="nick">Initial value of the Nick property.</param>
         /// <param name="lastLogin">Initial value of the LastLogin property.</param>
         /// <param name="expireTime">Initial value of the ExpireTime property.</param>
-        public static userinfo Createuserinfo(global::System.Int64 userId, global::System.String tB_UserId, global::System.String accessToken, global::System.String refreshToken, global::System.String nick, global::System.DateTime lastLogin, global::System.DateTime expireTime)
+        /// <param name="authDate">Initial value of the AuthDate property.</param>
+        public static userinfo Createuserinfo(global::System.Int64 userId, global::System.String tB_UserId, global::System.String accessToken, global::System.String refreshToken, global::System.String nick, global::System.DateTime lastLogin, global::System.DateTime expireTime, global::System.DateTime authDate)
         {
             userinfo userinfo = new userinfo();
             userinfo.UserId = userId;
@@ -466,6 +467,7 @@ namespace EasyWeibo.Model
             userinfo.Nick = nick;
             userinfo.LastLogin = lastLogin;
             userinfo.ExpireTime = expireTime;
+            userinfo.AuthDate = authDate;
             return userinfo;
         }
 
@@ -642,6 +644,30 @@ namespace EasyWeibo.Model
         private global::System.DateTime _ExpireTime;
         partial void OnExpireTimeChanging(global::System.DateTime value);
         partial void OnExpireTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime AuthDate
+        {
+            get
+            {
+                return _AuthDate;
+            }
+            set
+            {
+                OnAuthDateChanging(value);
+                ReportPropertyChanging("AuthDate");
+                _AuthDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AuthDate");
+                OnAuthDateChanged();
+            }
+        }
+        private global::System.DateTime _AuthDate;
+        partial void OnAuthDateChanging(global::System.DateTime value);
+        partial void OnAuthDateChanged();
 
         #endregion
     
@@ -653,18 +679,18 @@ namespace EasyWeibo.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("easyadsModel", "PK_UserId", "platforminfo")]
+        [EdmRelationshipNavigationPropertyAttribute("EasyadsModel", "PK_UserId", "platforminfo")]
         public EntityCollection<platforminfo> platforminfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<platforminfo>("easyadsModel.PK_UserId", "platforminfo");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<platforminfo>("EasyadsModel.PK_UserId", "platforminfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<platforminfo>("easyadsModel.PK_UserId", "platforminfo", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<platforminfo>("EasyadsModel.PK_UserId", "platforminfo", value);
                 }
             }
         }
