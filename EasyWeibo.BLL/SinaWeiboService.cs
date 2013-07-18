@@ -50,7 +50,7 @@ namespace EasyWeibo.BLL
 			{
 				OAuth2Base sinaAuth2 = new SinaWeiboOAuth2();
 				OAuth auth;
-				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSercet, sessionKey, null);
+				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSecret, sessionKey, null);
 				Client sinaClient = new Client(auth);
 				return sinaClient;
 			}

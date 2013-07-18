@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using EasyWeibo.BLL;
 using EasyWeibo.Helper;
 using Top.Api.Domain;
+using EasyWeibo.Model;
+using System;
 
 namespace EasyWeibo.App.Controllers
 {
@@ -18,7 +20,7 @@ namespace EasyWeibo.App.Controllers
 		// GET: /OAuth/
 
 		//OAuth2Base ob = OAuth2Factory.TaoBaoAuther;
-		
+
 		public ActionResult Index()
 		{
 			return View(obDic);
@@ -27,38 +29,54 @@ namespace EasyWeibo.App.Controllers
 		[HttpGet]
 		public ViewResult GetAccessToken(string code, string state)
 		{
-			if (!string.IsNullOrEmpty(code))
-			{			
-				string sessionKey = string.Empty;
-				if (obDic[state].server == Mappings.PlatForm.TaoBao && bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+			BLL.OAuthService authService = new BLL.OAuthService();
+			string sessionKey = null;
+			if (obDic[state].server == Mappings.PlatForm.TaoBao)
+			{
+				if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
 				{
 					sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
 				}
 				else
 				{
-					BLL.OAuthService authService = new BLL.OAuthService();
 					authService.RegisterPlatformSession(obDic[state], code);
 					sessionKey = obDic[state].AccessToken;
-					switch (obDic[state].server)
-					{
-						case Mappings.PlatForm.SinaWeiBo:
-							Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
-							break;
-						case Mappings.PlatForm.TaoBao:
-							Session[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = sessionKey;
-							break;
-						case Mappings.PlatForm.QQWeiBo:
-							Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = sessionKey;
-							break;
-						default:
-							break;
-					}
 				}
-				Session["session"] = sessionKey;
-				User user = tbService.GetSellerUserInfo(sessionKey);
-				Session["Nick"] = user.Nick;
+
+				userinfo info = tbService.GetUserInfoBySessionKey(sessionKey);
+				if (info == null)
+				{
+					info = new userinfo();
+					User user = tbService.GetSellerUserInfo(sessionKey);
+					info.Nick = user.Nick;
+					info.TB_UserId = user.UserId.ToString();
+					info.AccessToken = sessionKey;
+					info.AuthDate = DateTime.Now;
+					info.RefreshToken = string.Empty;
+					info.LastLogin = DateTime.Now;
+					tbService.SaveUserInfo(info);
+				}
+				Session["SessionKey"] = sessionKey;
+				Session["Nick"] = info.Nick;
+				return View();
 			}
 
+			authService.RegisterPlatformSession(obDic[state], code);
+			sessionKey = obDic[state].AccessToken;
+
+			switch (obDic[state].server)
+			{
+				case Mappings.PlatForm.SinaWeiBo:
+					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
+					break;
+				case Mappings.PlatForm.QQWeiBo:
+					Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = sessionKey;
+					break;
+				default:
+					break;
+			}
+
+			Session["SessionKey"] = sessionKey;
 			return View();
 		}
 	}

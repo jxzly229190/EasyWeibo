@@ -78,7 +78,7 @@ namespace EasyWeibo.BLL
 				return StringParserHelper.GetConfig(server.ToString() + ".AppKey");
 			}
 		}
-		public virtual string AppSercet
+		public virtual string AppSecret
 		{
 			get
 			{
@@ -90,6 +90,13 @@ namespace EasyWeibo.BLL
 			get
 			{
 				return StringParserHelper.GetConfig(server.ToString() + ".CallbackUrl");
+			}
+		}
+		public virtual string BaseUrl
+		{
+			get 
+			{
+				return StringParserHelper.GetConfig(server.ToString() + ".BaseUrl");
 			}
 		}
 		#endregion
@@ -105,7 +112,7 @@ namespace EasyWeibo.BLL
 			string result = string.Empty;
 			try
 			{
-				string para = "grant_type=authorization_code&client_id=" + AppKey + "&client_secret=" + AppSercet + "&code=" + code + "&state=" + server;
+				string para = "grant_type=authorization_code&client_id=" + AppKey + "&client_secret=" + AppSecret + "&code=" + code + "&state=" + server;
 				para += "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(CallbackUrl) + "&rnd=" + DateTime.Now.Second;
 				if (method == "POST")
 				{

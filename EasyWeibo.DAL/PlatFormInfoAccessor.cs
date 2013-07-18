@@ -15,15 +15,6 @@ namespace EasyWeibo.DAL
 			ee = new EasyadsEntities();
 		}
 
-		public void InsertPlatFormInfo(platforminfo info)
-		{
-			if (info != null)
-			{
-				ee.AddToplatforminfo(info);
-				ee.SaveChanges();
-			}
-		}
-
 		public List<platforminfo> GetPlatFormInfoByNickName(string nickName)
 		{
 			return ee.platforminfo.Where(info => info.Nick == nickName).ToList();
@@ -34,17 +25,31 @@ namespace EasyWeibo.DAL
 			return ee.platforminfo.Where(info => info.Nick == nickName && info.Platform == platformId).FirstOrDefault();
 		}
 
-		public void SavePlatFormInfo(platforminfo info)
+		public void AddOrUpdatePlatFormInfo(platforminfo info)
 		{
 			try
 			{
-				ee.platforminfo.AddObject(info);
+				platforminfo existingRecord = ee.platforminfo.Where(record => record.SessionKey == info.SessionKey && record.UserId == info.UserId).FirstOrDefault();
+				if (existingRecord != null)
+				{
+					info.ID = existingRecord.ID;
+					existingRecord = info;
+				}
+				else
+				{
+					ee.platforminfo.AddObject(info);
+				}
 				ee.SaveChanges();
 			}
 			catch(Exception ex)
 			{
 				throw new Exception("Failed to save platformInfo" + ex.Message);
 			}
+		}
+
+		public platforminfo GetUserInfoBySessionKey(string sessionKey)
+		{
+			return ee.platforminfo.Where(info => info.SessionKey == sessionKey).FirstOrDefault();
 		}
 	}
 }

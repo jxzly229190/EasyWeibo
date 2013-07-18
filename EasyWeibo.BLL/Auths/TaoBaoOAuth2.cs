@@ -65,17 +65,27 @@ namespace EasyWeibo.BLL
 			}
 		}
 
-		public override string AppSercet
+		public override string AppSecret
 		{
 			get
 			{
 				if (!IsUseSandBox)
-					return base.AppSercet;
+					return base.AppSecret;
 				else
 					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxAppSercet");
 			}
 		}
 
+		public override string BaseUrl
+		{
+			get
+			{
+				if (!IsUseSandBox)
+					return base.BaseUrl;
+				else
+					return StringParserHelper.GetConfig(server.ToString() + ".SandBoxBaseUrl");
+			}
+		}
 		public TaoBaoOAuth2()
 		{
 			_isUseSandBox = bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox"));

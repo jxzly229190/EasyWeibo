@@ -25,7 +25,7 @@ namespace EasyWeibo.BLL
 
 		public void SavePlatFormInfo(platforminfo info)
 		{
-			platformAccessor.SavePlatFormInfo(info);
+			platformAccessor.AddOrUpdatePlatFormInfo(info);
 		}
 	}
 }
