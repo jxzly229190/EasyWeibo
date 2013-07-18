@@ -41,20 +41,6 @@ namespace EasyWeibo.App.Controllers
 				{
 					authService.RegisterPlatformSession(obDic[state], code);
 					sessionKey = obDic[state].AccessToken;
-					switch (obDic[state].Server)
-					{
-						case EasyWeibo.Helper.Mappings.PlatForm.SinaWeiBo:
-							Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
-							break;
-						case EasyWeibo.Helper.Mappings.PlatForm.TaoBao:
-							Session[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = sessionKey;
-							break;
-						case EasyWeibo.Helper.Mappings.PlatForm.QQWeiBo:
-							Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = sessionKey;
-							break;
-						default:
-							break;
-					}
 				}
 
 				userinfo info = tbService.GetUserInfoBySessionKey(sessionKey);
