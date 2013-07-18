@@ -29,7 +29,7 @@ namespace EasyWeibo.App.Controllers
 			if (!string.IsNullOrEmpty(code))
 			{			
 				string sessionKey = string.Empty;
-				if (obDic[state].server == EasyWeibo.Helper.Mappings.PlatForm.TaoBao && bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
+				if (obDic[state].Server == EasyWeibo.Helper.Mappings.PlatForm.TaoBao && bool.Parse(StringParserHelper.GetConfig("UseTaoBaoSandBox")))
 				{
 					sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
 				}
@@ -38,7 +38,7 @@ namespace EasyWeibo.App.Controllers
 					BLL.OAuthService authService = new BLL.OAuthService();
 					authService.RegisterPlatformSession(obDic[state], code);
 					sessionKey = obDic[state].AccessToken;
-					switch (obDic[state].server)
+					switch (obDic[state].Server)
 					{
 						case EasyWeibo.Helper.Mappings.PlatForm.SinaWeiBo:
 							Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;

@@ -12,7 +12,13 @@ namespace EasyWeibo.BLL
 			}
 		}
 
-		public override Mappings.PlatForm server
+		public override string RefreshToken
+		{
+			//新浪微博暂时没有提供RefreshToken。
+			get { throw new System.NotImplementedException(); }
+		}
+
+		public override Mappings.PlatForm Server
 		{
 			get
 			{
@@ -30,7 +36,7 @@ namespace EasyWeibo.BLL
 		{
 			get
 			{
-				return string.Format("https://api.weibo.com/oauth2/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.server);
+				return string.Format("https://api.weibo.com/oauth2/authorize?response_type=code&client_id={0}&redirect_uri={1}&state={2}", this.AppKey, this.CallbackUrl, this.Server);
 			}
 		}
 		public override string TokenUrl
