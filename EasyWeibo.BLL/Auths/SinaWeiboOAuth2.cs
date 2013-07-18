@@ -47,5 +47,10 @@ namespace EasyWeibo.BLL
 			}
 		}
 		public string UserInfoUrl = "https://api.weibo.com/2/users/show.json?access_token={0}&uid={1}";
+
+		public override System.DateTime ExpireTime
+		{
+			get { throw new System.NotImplementedException(); }
+		}
 	}
 }

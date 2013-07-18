@@ -37,8 +37,8 @@
           <Property Name="AccessToken" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="RefreshToken" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="Nick" Type="varchar" Nullable="false" MaxLength="64" />
-          <Property Name="AuthDate" Type="datetime" Nullable="false" />
-          <Property Name="LastLogin" Type="datetime" Nullable="false" />
+          <Property Name="LastLogin" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExpireTime" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="PK_UserId">
           <End Role="userinfo" Type="easyadsModel.Store.userinfo" Multiplicity="1" />
@@ -90,8 +90,8 @@
           <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
           <Property Name="RefreshToken" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
           <Property Name="Nick" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
-          <Property Name="AuthDate" Type="DateTime" Nullable="false" />
-          <Property Name="LastLogin" Type="DateTime" Nullable="false" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpireTime" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="platforminfo" Relationship="easyadsModel.PK_UserId" FromRole="userinfo" ToRole="platforminfo" />
         </EntityType>
         <Association Name="PK_UserId">
@@ -129,8 +129,8 @@
             <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
             <ScalarProperty Name="RefreshToken" ColumnName="RefreshToken" />
             <ScalarProperty Name="Nick" ColumnName="Nick" />
-            <ScalarProperty Name="AuthDate" ColumnName="AuthDate" />
             <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+            <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>

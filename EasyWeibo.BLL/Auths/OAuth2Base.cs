@@ -34,7 +34,7 @@ namespace EasyWeibo.BLL
 		/// <summary>
 		/// 过期时间
 		/// </summary>
-		public DateTime ExpiresTime;
+		public abstract DateTime ExpireTime { get; }
 
 		/// <summary>
 		/// 第三方账号昵称

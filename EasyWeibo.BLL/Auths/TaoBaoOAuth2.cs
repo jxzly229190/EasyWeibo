@@ -91,5 +91,10 @@ namespace EasyWeibo.BLL
 		{
 			get { return Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "refresh_token"); }
 		}
+
+		public override DateTime ExpireTime
+		{
+			get { return DateTime.Now + TimeSpan.FromSeconds(double.Parse(Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "expires_in"))); }
+		}
 	}
 }

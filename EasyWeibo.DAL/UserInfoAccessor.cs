@@ -23,7 +23,7 @@ namespace EasyWeibo.DAL
 		{
 			try
 			{
-				userinfo existingRecord = ee.userinfo.Where(record => record.AccessToken == info.AccessToken && record.TB_UserId == info.TB_UserId).FirstOrDefault();
+				userinfo existingRecord = ee.userinfo.Where(record => record.TB_UserId == info.TB_UserId).FirstOrDefault();
 				if (existingRecord != null)
 				{
 					info.UserId = existingRecord.UserId;
@@ -40,6 +40,11 @@ namespace EasyWeibo.DAL
 			{
 				throw new Exception("Can't save userinfo " + ex.Message);
 			}
+		}
+
+		public userinfo GetUserInfoByTBUserId(string tbUserId)
+		{
+			return ee.userinfo.Where(info => info.TB_UserId == tbUserId).FirstOrDefault();
 		}
 	}
 }
