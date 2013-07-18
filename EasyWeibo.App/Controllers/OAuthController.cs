@@ -10,7 +10,7 @@ namespace EasyWeibo.App.Controllers
 {
 	public class OAuthController : Controller
 	{
-		private IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
+		private readonly IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
 		private TaobaoService tbService;
 		public OAuthController()
 		{
@@ -31,7 +31,7 @@ namespace EasyWeibo.App.Controllers
 		{
 			BLL.OAuthService authService = new BLL.OAuthService();
 			string sessionKey = null;
-			if (obDic[state].server == Mappings.PlatForm.TaoBao)
+			if (obDic[state].Server == Mappings.PlatForm.TaoBao)
 			{
 				if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
 				{
@@ -41,6 +41,20 @@ namespace EasyWeibo.App.Controllers
 				{
 					authService.RegisterPlatformSession(obDic[state], code);
 					sessionKey = obDic[state].AccessToken;
+					switch (obDic[state].Server)
+					{
+						case EasyWeibo.Helper.Mappings.PlatForm.SinaWeiBo:
+							Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
+							break;
+						case EasyWeibo.Helper.Mappings.PlatForm.TaoBao:
+							Session[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = sessionKey;
+							break;
+						case EasyWeibo.Helper.Mappings.PlatForm.QQWeiBo:
+							Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = sessionKey;
+							break;
+						default:
+							break;
+					}
 				}
 
 				userinfo info = tbService.GetUserInfoBySessionKey(sessionKey);
@@ -64,7 +78,7 @@ namespace EasyWeibo.App.Controllers
 			authService.RegisterPlatformSession(obDic[state], code);
 			sessionKey = obDic[state].AccessToken;
 
-			switch (obDic[state].server)
+			switch (obDic[state].Server)
 			{
 				case Mappings.PlatForm.SinaWeiBo:
 					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;

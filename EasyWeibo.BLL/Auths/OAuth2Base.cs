@@ -9,18 +9,18 @@ namespace EasyWeibo.BLL
 {
 	public abstract class OAuth2Base
 	{
-		protected WebClient wc = new WebClient();
+		protected WebClient Wc;
 		public OAuth2Base()
 		{
-			wc = new WebClient();
-			wc.Encoding = Encoding.UTF8;
-			wc.Headers.Add("Pragma", "no-cache");
+			Wc = new WebClient();
+			Wc.Encoding = Encoding.UTF8;
+			Wc.Headers.Add("Pragma", "no-cache");
 		}
 		#region 基础属性
 		/// <summary>
 		/// 返回的开放ID。
 		/// </summary>
-		public string openID = string.Empty;
+		public string OpenId = string.Empty;
 		/// <summary>
 		/// 访问的Token
 		/// </summary>
@@ -29,26 +29,28 @@ namespace EasyWeibo.BLL
 			get;
 		}
 
+		public abstract string RefreshToken { get; } 
+
 		/// <summary>
 		/// 过期时间
 		/// </summary>
-		public DateTime expiresTime;
+		public DateTime ExpiresTime;
 
 		/// <summary>
 		/// 第三方账号昵称
 		/// </summary>
-		public string nickName = string.Empty;
+		public string NickName = string.Empty;
 
 		/// <summary>
 		/// 第三方账号头像地址
 		/// </summary>
-		public string headUrl = string.Empty;
+		public string HeadUrl = string.Empty;
 		/// <summary>
 		/// 首次请求时返回的Code
 		/// </summary>
 		/// 
 		public string TokenResultJson { protected set; get; }
-		public abstract Mappings.PlatForm server
+		public abstract Mappings.PlatForm Server
 		{
 			get;
 		}
@@ -75,28 +77,28 @@ namespace EasyWeibo.BLL
 		{
 			get
 			{
-				return StringParserHelper.GetConfig(server.ToString() + ".AppKey");
+				return StringParserHelper.GetConfig(Server.ToString() + ".AppKey");
 			}
 		}
 		public virtual string AppSecret
 		{
 			get
 			{
-				return StringParserHelper.GetConfig(server.ToString() + ".AppSercet");
+				return StringParserHelper.GetConfig(Server.ToString() + ".AppSercet");
 			}
 		}
 		public virtual string CallbackUrl
 		{
 			get
 			{
-				return StringParserHelper.GetConfig(server.ToString() + ".CallbackUrl");
+				return StringParserHelper.GetConfig(Server.ToString() + ".CallbackUrl");
 			}
 		}
 		public virtual string BaseUrl
 		{
 			get 
 			{
-				return StringParserHelper.GetConfig(server.ToString() + ".BaseUrl");
+				return StringParserHelper.GetConfig(Server.ToString() + ".BaseUrl");
 			}
 		}
 		#endregion
@@ -109,27 +111,27 @@ namespace EasyWeibo.BLL
 		/// <returns></returns>
 		protected string GetToken(string method,string code)
 		{
-			string result = string.Empty;
+			string result;
 			try
 			{
-				string para = "grant_type=authorization_code&client_id=" + AppKey + "&client_secret=" + AppSecret + "&code=" + code + "&state=" + server;
+				string para = "grant_type=authorization_code&client_id=" + AppKey + "&client_secret=" + AppSecret + "&code=" + code + "&state=" + Server;
 				para += "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(CallbackUrl) + "&rnd=" + DateTime.Now.Second;
 				if (method == "POST")
 				{
-					if (string.IsNullOrEmpty(wc.Headers["Content-Type"]))
+					if (string.IsNullOrEmpty(Wc.Headers["Content-Type"]))
 					{
-						wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+						Wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 					}
-					result = wc.UploadString(TokenUrl, method, para);
+					result = Wc.UploadString(TokenUrl, method, para);
 				}
 				else
 				{
-					result = wc.DownloadString(TokenUrl + "?" + para);
+					result = Wc.DownloadString(TokenUrl + "?" + para);
 				}
 			}
 			catch (Exception err)
 			{
-				throw err;
+				throw;
 			}
 			return result;
 		}

@@ -9,7 +9,7 @@ namespace EasyWeibo.BLL
 			{
 			    if(oa.Authorize(code))
 			    {
-					switch (oa.server)
+					switch (oa.Server)
 					{
 						case Mappings.PlatForm.SinaWeiBo:
 							//todo:保存数据进入数据库或者Cache中
