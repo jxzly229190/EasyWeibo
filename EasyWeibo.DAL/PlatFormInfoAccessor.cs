@@ -22,14 +22,14 @@ namespace EasyWeibo.DAL
 
 		public platforminfo GetPlatFormInfoByNickNameAndPlatFormId(string nickName, int platformId)
 		{
-			return ee.platforminfo.Where(info => info.Nick == nickName && info.Platform == platformId).FirstOrDefault();
+			return ee.platforminfo.FirstOrDefault(info => info.Nick == nickName && info.Platform == platformId);
 		}
 
 		public void AddOrUpdatePlatFormInfo(platforminfo info)
 		{
 			try
 			{
-				platforminfo existingRecord = ee.platforminfo.Where(record => record.SessionKey == info.SessionKey && record.UserId == info.UserId).FirstOrDefault();
+				platforminfo existingRecord = ee.platforminfo.FirstOrDefault(record => record.SessionKey == info.SessionKey && record.UserId == info.UserId);
 				if (existingRecord != null)
 				{
 					info.ID = existingRecord.ID;
@@ -49,7 +49,7 @@ namespace EasyWeibo.DAL
 
 		public platforminfo GetUserInfoBySessionKey(string sessionKey)
 		{
-			return ee.platforminfo.Where(info => info.SessionKey == sessionKey).FirstOrDefault();
+			return ee.platforminfo.FirstOrDefault(info => info.SessionKey == sessionKey);
 		}
 	}
 }
