@@ -10,6 +10,7 @@ namespace EasyWeibo.App.Controllers
 {
 	public class OAuthController : Controller
 	{
+		//start URL: http://127.0.0.1:1472/OAuth/GetAccessToken?code=jDEeshF0i0SPPJKI1CoGoFD12051&state=TaoBao
 		private readonly IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
 		private TaobaoService tbService;
 		public OAuthController()
@@ -46,14 +47,28 @@ namespace EasyWeibo.App.Controllers
 				userinfo info = tbService.GetUserInfoBySessionKey(sessionKey);
 				if (info == null)
 				{
-					info = new userinfo();
 					User user = tbService.GetSellerUserInfo(sessionKey);
-					info.Nick = user.Nick;
-					info.TB_UserId = user.UserId.ToString();
+					info = tbService.GetUserInfoByTBUserId(user.UserId.ToString());
+					if (info == null)
+					{
+						info = new userinfo();
+						info.Nick = user.Nick;
+						info.TB_UserId = user.UserId.ToString();
+						info.AuthDate = DateTime.Now;
+					}
+					
 					info.AccessToken = sessionKey;
-					info.AuthDate = DateTime.Now;
-					info.RefreshToken = string.Empty;
-					info.LastLogin = DateTime.Now;
+
+					if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
+					{
+						info.RefreshToken = sessionKey;
+						info.ExpireTime = DateTime.Now.AddDays(1);
+					}
+					else
+					{
+						info.RefreshToken = obDic[state].RefreshToken;
+						info.ExpireTime = obDic[state].ExpireTime;
+					}
 					tbService.SaveUserInfo(info);
 				}
 				Session["SessionKey"] = sessionKey;

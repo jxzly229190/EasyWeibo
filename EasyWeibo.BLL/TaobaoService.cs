@@ -33,6 +33,10 @@ namespace EasyWeibo.BLL
 			return uiAccessor.GetUserInfoBySessionKey(sessionKey);
 		}
 
+		public userinfo GetUserInfoByTBUserId(string tbUserId)
+		{
+			return uiAccessor.GetUserInfoByTBUserId(tbUserId);
+		}
 		public void SaveUserInfo(userinfo userInfo)
 		{
 			uiAccessor.AddOrUpdateUserInfo(userInfo);

@@ -60,10 +60,11 @@ CREATE TABLE `userinfo` (
   `AccessToken` varchar(128) NOT NULL,
   `RefreshToken` varchar(128) NOT NULL,
   `Nick` varchar(64) NOT NULL,
-  `AuthDate` datetime NOT NULL COMMENT '授权日期，即订阅服务时间',
-  `LastLogin` datetime NOT NULL COMMENT '最后一次登录服务日期',
+  `LastLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次登录服务日期',
+  `ExpireTime` datetime NOT NULL,
+  `AuthDate` datetime NOT NULL,
   PRIMARY KEY (`UserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=gbk;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,4 +89,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-08 23:07:32
+-- Dump completed on 2013-07-19  0:50:14
