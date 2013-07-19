@@ -1,4 +1,5 @@
 ﻿using EasyWeibo.Helper;
+using System;
 
 namespace EasyWeibo.BLL
 {
@@ -55,7 +56,7 @@ namespace EasyWeibo.BLL
 
 		public override System.DateTime ExpireTime
 		{
-			get { throw new System.NotImplementedException(); }
+			get { return DateTime.Now; }
 		}
 	}
 }

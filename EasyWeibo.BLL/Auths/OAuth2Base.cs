@@ -37,9 +37,9 @@ namespace EasyWeibo.BLL
 		public abstract string RefreshToken { get; } 
 
 		/// <summary>
-		/// 过期时间（目前还不支持）
+		/// 过期时间
 		/// </summary>
-		public DateTime ExpiresTime;
+		public abstract DateTime ExpireTime { get; }
 
 		/*
 		/// <summary>
