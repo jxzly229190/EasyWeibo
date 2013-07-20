@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using EasyWeibo.Model;
 
 namespace EasyWeibo.DAL.Base
 { 
-	public abstract class AccessorBase<T> where T: class, new()
+	public class AccessorBase<T> where T: class, new()
 	{
-		protected EasyadsEntities dbOperator = new EasyadsEntities();
+		protected EasyadsEntities DbOperator;
+
+		/// <summary>
+		/// 构建对象
+		/// </summary>
+		public AccessorBase()
+		{
+			 DbOperator= new EasyadsEntities();
+		}
 
 		/// <summary>
 		/// 根据表达式获取多个实体
@@ -18,7 +24,7 @@ namespace EasyWeibo.DAL.Base
 		/// <returns></returns>
 		public IQueryable<T> GetEntities(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda)
 		{
-			return Queryable.Where(this.dbOperator.CreateObjectSet<T>(), whereLambda);
+			return DbOperator.CreateObjectSet<T>().Where(whereLambda);
 		}
 
 		/// <summary>
@@ -28,9 +34,9 @@ namespace EasyWeibo.DAL.Base
 		/// <returns></returns>
 		public int RemoveEntity(T model)
 		{
-			dbOperator.CreateObjectSet<T>().Attach(model);
-			dbOperator.ObjectStateManager.ChangeObjectState(model, EntityState.Deleted);
-			return dbOperator.SaveChanges();
+			DbOperator.CreateObjectSet<T>().Attach(model);
+			DbOperator.ObjectStateManager.ChangeObjectState(model, EntityState.Deleted);
+			return DbOperator.SaveChanges();
 		}
 
 		/// <summary>
@@ -40,13 +46,36 @@ namespace EasyWeibo.DAL.Base
 		/// <returns></returns>
 		public int RemoveEntitiesByExpress(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda)
 		{
-			var temp = dbOperator.CreateObjectSet<T>().Where(whereLambda);
+			var temp = DbOperator.CreateObjectSet<T>().Where(whereLambda);
 			foreach (var entity in temp)
 			{
-				dbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Deleted);
+				DbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Deleted);
 			}
-			return dbOperator.SaveChanges();
+			return DbOperator.SaveChanges();
 		}
 
+		/// <summary>
+		/// 添加一个对象到数据库
+		/// </summary>
+		/// <param name="entity"></param>
+		/// <returns></returns>
+		public T AddEntity(T entity)
+		{
+			DbOperator.Attach(entity);
+			DbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Added);
+			DbOperator.SaveChanges();
+			return entity;
+		}
+
+		/// <summary>
+		/// 更新对象到数据库
+		/// </summary>
+		/// <param name="entity"></param>
+		public void UpdateEntity(T entity)
+		{
+			DbOperator.Attach(entity);
+			DbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+			DbOperator.SaveChanges();
+		}
 	}
 }

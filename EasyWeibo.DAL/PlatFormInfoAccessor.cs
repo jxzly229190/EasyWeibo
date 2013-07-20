@@ -4,52 +4,58 @@ using System.Linq;
 using System.Text;
 using EasyWeibo.Model;
 using EasyWeibo.Helper;
+using EasyWeibo.DAL.Base;
 
 namespace EasyWeibo.DAL
 {
-	public class PlatFormInfoAccessor
+	public class PlatFormInfoAccessor:AccessorBase<platforminfo>
 	{
-		private EasyadsEntities ee;
-		public PlatFormInfoAccessor()
-		{
-			ee = new EasyadsEntities();
-		}
 
 		public List<platforminfo> GetPlatFormInfoByNickName(string nickName)
 		{
-			return ee.platforminfo.Where(info => info.Nick == nickName).ToList();
+			return GetEntities(info => info.Nick == nickName).ToList();
 		}
 
 		public platforminfo GetPlatFormInfoByNickNameAndPlatFormId(string nickName, int platformId)
 		{
-			return ee.platforminfo.FirstOrDefault(info => info.Nick == nickName && info.Platform == platformId);
+			return GetEntities(info => info.Nick == nickName && info.Platform == platformId).FirstOrDefault();
+		}
+
+		public platforminfo GetUserInfoBySessionKey(string sessionKey)
+		{
+			return GetEntities(info => info.SessionKey == sessionKey).FirstOrDefault();
+		}
+
+		public platforminfo AddPlatFormInfo(platforminfo info)
+		{
+			try
+			{
+				return AddEntity(info);
+			}
+			catch(Exception ex)
+			{
+				throw new Exception("Can`t add platforminfo " + ex.Message);
+			}
 		}
 
 		public void AddOrUpdatePlatFormInfo(platforminfo info)
 		{
 			try
 			{
-				platforminfo existingRecord = ee.platforminfo.FirstOrDefault(record => record.SessionKey == info.SessionKey && record.UserId == info.UserId);
+				platforminfo existingRecord = GetEntities(record => record.SessionKey == info.SessionKey && record.UserId == info.UserId).FirstOrDefault();
 				if (existingRecord != null)
 				{
-					info.ID = existingRecord.ID;
-					existingRecord = info;
+					UpdateEntity(existingRecord);
 				}
 				else
 				{
-					ee.platforminfo.AddObject(info);
+					AddEntity(info);
 				}
-				ee.SaveChanges();
 			}
 			catch(Exception ex)
 			{
 				throw new Exception("Failed to save platformInfo" + ex.Message);
 			}
-		}
-
-		public platforminfo GetUserInfoBySessionKey(string sessionKey)
-		{
-			return ee.platforminfo.FirstOrDefault(info => info.SessionKey == sessionKey);
 		}
 	}
 }

@@ -3,38 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EasyWeibo.Model;
+using EasyWeibo.DAL.Base;
 
 namespace EasyWeibo.DAL
 {
-	public class UserInfoAccessor
+	public class UserInfoAccessor: AccessorBase<userinfo>
 	{
-		private EasyadsEntities ee;
-		public UserInfoAccessor()
-		{
-			ee = new EasyadsEntities();
-		}
-
 		public userinfo GetUserInfoBySessionKey(string sessionKey)
 		{
-			return ee.userinfo.Where(info => info.AccessToken == sessionKey).FirstOrDefault();
+			return this.GetEntities(info => info.AccessToken == sessionKey).FirstOrDefault();
 		}
 
-		public void AddOrUpdateUserInfo(userinfo info)
+		public void AddOrUpdateUserInfo(userinfo user)
 		{
 			try
 			{
-				userinfo existingRecord = ee.userinfo.Where(record => record.TB_UserId == info.TB_UserId).FirstOrDefault();
-				if (existingRecord != null)
+				var existedRecord = GetEntities(record => record.TB_UserId == user.TB_UserId).FirstOrDefault();
+				
+				if (existedRecord != null)
 				{
-					info.UserId = existingRecord.UserId;
-					existingRecord = info;
+					this.UpdateTBUserInfo(existedRecord);
 				}
 				else
 				{
-					ee.userinfo.AddObject(info);
+					this.AddTBUserInfo(user);
 				}
-
-				ee.SaveChanges();
 			}
 			catch(Exception ex)
 			{
@@ -44,7 +37,17 @@ namespace EasyWeibo.DAL
 
 		public userinfo GetUserInfoByTBUserId(string tbUserId)
 		{
-			return ee.userinfo.Where(info => info.TB_UserId == tbUserId).FirstOrDefault();
+			return GetEntities(info => info.TB_UserId == tbUserId).FirstOrDefault();
+		}
+
+		public userinfo AddTBUserInfo(userinfo tbUserInfo)
+		{
+			return this.AddEntity(tbUserInfo);
+		}
+
+		public void UpdateTBUserInfo(userinfo tbUserInfo)
+		{
+			this.UpdateEntity(tbUserInfo);
 		}
 	}
 }
