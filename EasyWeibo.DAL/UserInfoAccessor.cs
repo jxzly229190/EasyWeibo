@@ -22,6 +22,8 @@ namespace EasyWeibo.DAL
 				
 				if (existedRecord != null)
 				{
+					user.UserId = existedRecord.UserId;
+					existedRecord = user;
 					this.UpdateTBUserInfo(existedRecord);
 				}
 				else
