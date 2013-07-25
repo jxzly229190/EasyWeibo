@@ -61,8 +61,7 @@ namespace EasyWeibo.DAL.Base
 		/// <returns></returns>
 		public T AddEntity(T entity)
 		{
-			DbOperator.Attach(entity);
-			DbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Added);
+			DbOperator.CreateObjectSet<T>().AddObject(entity);
 			DbOperator.SaveChanges();
 			return entity;
 		}
@@ -73,7 +72,7 @@ namespace EasyWeibo.DAL.Base
 		/// <param name="entity"></param>
 		public void UpdateEntity(T entity)
 		{
-			DbOperator.Attach(entity);
+			DbOperator.CreateObjectSet<T>().Attach(entity);
 			DbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
 			DbOperator.SaveChanges();
 		}
