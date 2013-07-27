@@ -13,15 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.Helper", "EasyWei
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.BLL", "EasyWeibo.BLL\EasyWeibo.BLL.csproj", "{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWeibo.BLL.Tests", "EasyWeibo.BLL.Tests\EasyWeibo.BLL.Tests.csproj", "{E0A0A02F-B10E-4263-AC47-15E410FF7480}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1231CD67-D5A3-4849-886D-D55E55B47FDB}"
-	ProjectSection(SolutionItems) = preProject
-		EasyWeibo.vsmdi = EasyWeibo.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = EasyWeibo.vsmdi
@@ -55,10 +46,6 @@ Global
 		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECDA8E4B-3519-4852-A6DE-BBA6920602D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0A0A02F-B10E-4263-AC47-15E410FF7480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0A0A02F-B10E-4263-AC47-15E410FF7480}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0A0A02F-B10E-4263-AC47-15E410FF7480}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0A0A02F-B10E-4263-AC47-15E410FF7480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

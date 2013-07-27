@@ -28,43 +28,30 @@ namespace EasyWeibo.App.Controllers
 		[HttpGet]
 		public ViewResult GetAccessToken(string code, string state)
 		{
-			BLL.OAuthService authService = new BLL.OAuthService();
-			string sessionKey = null;
-			if (obDic[state].Server == Mappings.PlatForm.TaoBao)
-			{
-				
-			}
+			var authService = new BLL.OAuthService();
+			string sessionKey = string.Empty;
 
-			authService.RegisterPlatformSession(obDic[state], code);
-			sessionKey = obDic[state].AccessToken;
-
+			OAuth2Model authinfo;
 			switch (obDic[state].Server)
 			{
 				case Mappings.PlatForm.TaoBao:
-					if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
-					{
-						sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
-					}
-					else
-					{
-						var info = authService.RegisterPlatformSession<userinfo>(obDic[state], code);
-						sessionKey = obDic[state].AccessToken;
-					}
 
-					Session["SessionKey"] = sessionKey;
+					var info = authService.RegisterTaoBaoSession(obDic[state], code);
+					sessionKey = info.AccessToken;
+					Session["UID"] = info.UserId;
 					Session["Nick"] = info.Nick;
-					return View();
-				case Mappings.PlatForm.SinaWeiBo:
-					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
+
+					Session[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = sessionKey;
 					break;
-				case Mappings.PlatForm.QQWeiBo:
-					Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = sessionKey;
+				case Mappings.PlatForm.SinaWeiBo:
+					var userId = (long) Session["UID"];
+					var platformInfo = authService.RegisterPlatformSession(obDic[state], code, userId);
+					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = platformInfo.SessionKey;
 					break;
 				default:
 					break;
 			}
 
-			Session["SessionKey"] = sessionKey;
 			return View();
 		}
 	}

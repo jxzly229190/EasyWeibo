@@ -98,11 +98,12 @@ namespace EasyWeibo.BLL
 			return platformAccessor.GetPlatFormInfoBySessionKey(key);
 		}
 
-		public platforminfo RegisterPlatform(OAuth2Base oa, userinfo userInfo)
+		public platforminfo RegisterPlatform(OAuth2Base oa, long userId)
 		{
 			if(oa!=null&&string.IsNullOrEmpty(oa.AccessToken))
 			{
 				var platformInfo = this.GetPlatformBySessionKey(oa.AccessToken);
+				
 				if(platformInfo!=null)
 				{
 					platformInfo.AuthDate = DateTime.Now;
@@ -112,7 +113,7 @@ namespace EasyWeibo.BLL
 					return platformInfo;
 				}
 
-				return SavePlatforminfo(oa, userInfo);
+				return SavePlatforminfo(oa, userId);
 			}
 			else
 			{
@@ -120,11 +121,11 @@ namespace EasyWeibo.BLL
 			}
 		}
 
-		public platforminfo SavePlatforminfo(OAuth2Base oa, string userId)
+		public platforminfo SavePlatforminfo(OAuth2Base oa, long userId)
 		{
 			platforminfo platformInfo;
 			platformInfo = new platforminfo();
-			var user = this.sinaClient.API.Entity.Users.Show(oa.PlatformUId)
+			var user = this.sinaClient.API.Entity.Users.Show(oa.PlatformUId);
 			if (user != null)
 			{
 				platformInfo.Nick = user.Name;
