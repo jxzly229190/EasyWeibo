@@ -12,10 +12,8 @@ namespace EasyWeibo.App.Controllers
 	{
 		//start SandBox URL: http://127.0.0.1:1472/OAuth/GetAccessToken?code=jDEeshF0i0SPPJKI1CoGoFD12051&state=TaoBao
 		private readonly IDictionary<string, OAuth2Base> obDic = OAuth2Factory.ServerList;
-		private TaobaoService tbService;
 		public OAuthController()
 		{
-			tbService = new TaobaoService();
 		}
 		//
 		// GET: /OAuth/
@@ -34,45 +32,7 @@ namespace EasyWeibo.App.Controllers
 			string sessionKey = null;
 			if (obDic[state].Server == Mappings.PlatForm.TaoBao)
 			{
-				if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
-				{
-					sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
-				}
-				else
-				{
-					authService.RegisterPlatformSession(obDic[state], code);
-					sessionKey = obDic[state].AccessToken;
-				}
-
-				userinfo info = tbService.GetUserInfoBySessionKey(sessionKey);
-				if (info == null)
-				{
-					User user = tbService.GetSellerUserInfo(sessionKey);
-					info = tbService.GetUserInfoByTBUserId(user.UserId.ToString());
-					if (info == null)
-					{
-						info = new userinfo();
-						info.Nick = user.Nick;
-						info.TB_UserId = user.UserId.ToString();
-						info.AuthDate = DateTime.Now;
-					}
-					
-					info.AccessToken = sessionKey;
-					if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
-					{
-						info.RefreshToken = sessionKey;
-						info.ExpireTime = DateTime.Now.AddDays(1);
-					}
-					else
-					{
-						info.RefreshToken = obDic[state].RefreshToken;
-						info.ExpireTime = obDic[state].ExpireTime;
-					}
-					tbService.SaveUserInfo(info);
-				}
-				Session["SessionKey"] = sessionKey;
-				Session["Nick"] = info.Nick;
-				return View();
+				
 			}
 
 			authService.RegisterPlatformSession(obDic[state], code);
@@ -80,6 +40,20 @@ namespace EasyWeibo.App.Controllers
 
 			switch (obDic[state].Server)
 			{
+				case Mappings.PlatForm.TaoBao:
+					if ((obDic[state] as TaoBaoOAuth2).IsUseSandBox)
+					{
+						sessionKey = "6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902";
+					}
+					else
+					{
+						var info = authService.RegisterPlatformSession<userinfo>(obDic[state], code);
+						sessionKey = obDic[state].AccessToken;
+					}
+
+					Session["SessionKey"] = sessionKey;
+					Session["Nick"] = info.Nick;
+					return View();
 				case Mappings.PlatForm.SinaWeiBo:
 					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = sessionKey;
 					break;

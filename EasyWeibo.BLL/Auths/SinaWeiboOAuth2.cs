@@ -56,7 +56,7 @@ namespace EasyWeibo.BLL
 
 		public override System.DateTime ExpireTime
 		{
-			get { return DateTime.Now; }
+			get { return DateTime.Now.AddMilliseconds(Int32.Parse(Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "expires_in"))); }
 		}
 	}
 }

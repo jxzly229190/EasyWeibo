@@ -5,9 +5,10 @@ using System.Text;
 
 namespace EasyWeibo.Model
 {
-	class OAuth2Model
+	public class OAuth2Model
 	{		
 		public string UID { set; get; }
+		public string Nick { set; get; }
 		public string AppKey { set; get; }
 		public string AppSecret { set; get; }
 		public string AccessToken { set; get; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.SessionState;
+using EasyWeibo.DAL;
 using EasyWeibo.Model;
 using NetDimension.Weibo;
 
@@ -10,8 +11,10 @@ namespace EasyWeibo.BLL
 	{
 		Client sinaClient;
 		private string sessionKey;
+		private PlatFormInfoAccessor accessor;
 		public SinaWeiboService(string sessionKey)
 		{
+			accessor=new PlatFormInfoAccessor();
 			this.sessionKey = sessionKey;
 			sinaClient = InitializeSinaClient();
 		}
@@ -49,8 +52,7 @@ namespace EasyWeibo.BLL
 			if (!string.IsNullOrEmpty(sessionKey))//检查是否存在SessionKey，后续可能还要从数据库去取
 			{
 				OAuth2Base sinaAuth2 = new SinaWeiboOAuth2();
-				OAuth auth;
-				auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSecret, sessionKey, null);
+				OAuth auth = new OAuth(sinaAuth2.AppKey, sinaAuth2.AppSecret, sessionKey, null);
 				Client sinaClient = new Client(auth);
 				return sinaClient;
 			}
@@ -63,6 +65,12 @@ namespace EasyWeibo.BLL
 		public override TokenResult VerifyAccessToken()
 		{
 			return VerifyAccessToken(sinaClient);
+		}
+
+		public override void SavePlatformInfo(platforminfo entity)
+		{
+			var accessor=new PlatFormInfoAccessor();
+			accessor.AddEntity(entity);
 		}
 
 		private TokenResult VerifyAccessToken(Client sinaClient)
@@ -82,6 +90,54 @@ namespace EasyWeibo.BLL
 		public override void BatchSend(List<WeiboMessage> msgList)
 		{
 			throw new NotImplementedException();
+		}
+
+		public platforminfo GetPlatformBySessionKey(string key)
+		{
+			var platformAccessor=new PlatFormInfoAccessor();
+			return platformAccessor.GetPlatFormInfoBySessionKey(key);
+		}
+
+		public platforminfo RegisterPlatform(OAuth2Base oa, userinfo userInfo)
+		{
+			if(oa!=null&&string.IsNullOrEmpty(oa.AccessToken))
+			{
+				var platformInfo = this.GetPlatformBySessionKey(oa.AccessToken);
+				if(platformInfo!=null)
+				{
+					platformInfo.AuthDate = DateTime.Now;
+					platformInfo.ExpireDate = oa.ExpireTime;
+					platformInfo.Refresh_token = sinaClient.OAuth.RefreshToken;
+					accessor.UpdateEntity(platformInfo);
+					return platformInfo;
+				}
+
+				return SavePlatforminfo(oa, userInfo);
+			}
+			else
+			{
+				throw new NullReferenceException("Auth2SinaWeibo 对象为空");
+			}
+		}
+
+		public platforminfo SavePlatforminfo(OAuth2Base oa, string userId)
+		{
+			platforminfo platformInfo;
+			platformInfo = new platforminfo();
+			var user = this.sinaClient.API.Entity.Users.Show(oa.PlatformUId)
+			if (user != null)
+			{
+				platformInfo.Nick = user.Name;
+				platformInfo.PlatformUserId = user.ID;
+				platformInfo.UserId = userId;
+				platformInfo.Platform = (int) Helper.Mappings.PlatForm.SinaWeiBo; //新浪微博
+				platformInfo.SessionKey = oa.AccessToken;
+				platformInfo.AuthDate = DateTime.Now;
+				platformInfo.ExpireDate = oa.ExpireTime;
+				platformInfo.Refresh_token = sinaClient.OAuth.RefreshToken;
+				return accessor.AddEntity(platformInfo); //保存
+			}
+			return null;
 		}
 	}
 }

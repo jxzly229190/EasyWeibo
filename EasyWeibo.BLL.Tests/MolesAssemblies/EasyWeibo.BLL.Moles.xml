@@ -263,6 +263,10 @@
             <summary>Sets the mole of <see cref="M:EasyWeibo.BLL.OAuthService.RegisterPlatformSession(EasyWeibo.BLL.OAuth2Base,System.String)"/>
             </summary>
         </member>
+        <member name="P:EasyWeibo.BLL.Moles.MOAuthService.RegisterTaoBaoSessionOAuth2Base">
+            <summary>Sets the mole of <see cref="M:EasyWeibo.BLL.OAuthService.RegisterTaoBaoSession(EasyWeibo.BLL.OAuth2Base)"/>
+            </summary>
+        </member>
         <member name="T:EasyWeibo.BLL.Moles.MOAuthService.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
