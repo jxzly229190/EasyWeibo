@@ -94,31 +94,12 @@ namespace EasyWeibo.BLL
 
 		public platforminfo GetPlatformBySessionKey(string key)
 		{
-			var platformAccessor=new PlatFormInfoAccessor();
-			return platformAccessor.GetPlatFormInfoBySessionKey(key);
+			return accessor.GetPlatFormInfoBySessionKey(key);
 		}
 
-		public platforminfo RegisterPlatform(OAuth2Base oa, long userId)
+		public void UpdateWeiboInfo(platforminfo info)
 		{
-			if(oa!=null&&string.IsNullOrEmpty(oa.AccessToken))
-			{
-				var platformInfo = this.GetPlatformBySessionKey(oa.AccessToken);
-				
-				if(platformInfo!=null)
-				{
-					platformInfo.AuthDate = DateTime.Now;
-					platformInfo.ExpireDate = oa.ExpireTime;
-					platformInfo.Refresh_token = sinaClient.OAuth.RefreshToken;
-					accessor.UpdateEntity(platformInfo);
-					return platformInfo;
-				}
-
-				return SavePlatforminfo(oa, userId);
-			}
-			else
-			{
-				throw new NullReferenceException("Auth2SinaWeibo 对象为空");
-			}
+			accessor.UpdateEntity(info);
 		}
 
 		public platforminfo SavePlatforminfo(OAuth2Base oa, long userId)

@@ -62,16 +62,18 @@ namespace EasyWeibo.BLL
 				if (info == null)
 				{
 					info = new userinfo();
-					info.Nick = user.Nick;
-					info.TB_UserId = user.UserId.ToString();
-					info.AuthDate = DateTime.Now;
 				}
+				info.Nick = user.Nick;
+				info.TB_UserId = user.UserId.ToString();
+				info.AuthDate = DateTime.Now; 
+				info.ExpireTime = DateTime.Now.AddDays(1); //Test case, in the real environment, it is not like this.
+				info.LastLogin = DateTime.Now;
 
 				info.AccessToken = sessionKey;
 				if ((oa as TaoBaoOAuth2).IsUseSandBox)
 				{
 					info.RefreshToken = sessionKey;
-					info.ExpireTime = DateTime.Now.AddDays(1); //Test case, in the real environment, it is not like this.
+					
 				}
 				else
 				{

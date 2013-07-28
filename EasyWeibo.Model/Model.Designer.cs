@@ -122,12 +122,7 @@ namespace EasyWeibo.Model
         }
 
         #endregion
-
-		public void Attach(object entity)
-		{
-			throw new NotImplementedException();
-		}
-	}
+    }
     
 
     #endregion

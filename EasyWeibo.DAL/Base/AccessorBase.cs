@@ -72,7 +72,14 @@ namespace EasyWeibo.DAL.Base
 		/// <param name="entity"></param>
 		public void UpdateEntity(T entity)
 		{
-			DbOperator.CreateObjectSet<T>().Attach(entity);
+			try
+			{
+				DbOperator.CreateObjectSet<T>().Attach(entity);
+			}
+			catch (InvalidOperationException exception)
+			{
+				//实体已经附加，忽略此异常继续执行。
+			}
 			DbOperator.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
 			DbOperator.SaveChanges();
 		}
