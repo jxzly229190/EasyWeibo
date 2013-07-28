@@ -41,7 +41,6 @@ namespace EasyWeibo.BLL
 			throw new Exception("认证失败");
 		}
 
-
 		public platforminfo RegisterSinaWeiboPlatform(OAuth2Base oa, long userId)
 		{
 			if (oa != null&&!string.IsNullOrEmpty(oa.AccessToken))

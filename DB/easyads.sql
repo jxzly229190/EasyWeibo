@@ -16,6 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `UserId` int(10) unsigned NOT NULL,
+  `PId` int(10) unsigned NOT NULL,
+  `Message` varchar(2048) NOT NULL,
+  `PicUrl` varchar(5000) DEFAULT NULL,
+  `VideoUrl` varchar(2000) DEFAULT NULL,
+  `CreatedDate` datetime DEFAULT NULL,
+  `ModifiedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_Message_UserInfo` (`UserId`),
+  CONSTRAINT `FK_Message_UserInfo` FOREIGN KEY (`UserId`) REFERENCES `userinfo` (`UserId`),
+  CONSTRAINT `FK_Message_PlatFormInfo` FOREIGN KEY (`ID`) REFERENCES `platforminfo` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message`
+--
+
+LOCK TABLES `message` WRITE;
+/*!40000 ALTER TABLE `message` DISABLE KEYS */;
+/*!40000 ALTER TABLE `message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `platforminfo`
 --
 
@@ -44,7 +76,7 @@ CREATE TABLE `platforminfo` (
 
 LOCK TABLES `platforminfo` WRITE;
 /*!40000 ALTER TABLE `platforminfo` DISABLE KEYS */;
-INSERT INTO `platforminfo` VALUES ('2.00BieeRDPMcUFB1e4258d2be179OCD','','五环外外地人','3009285817',1,'2013-07-30 06:45:21','2013-07-28 10:57:20',1,8);
+INSERT INTO `platforminfo` VALUES ('2.00BieeRDPMcUFB1e4258d2be179OCD','','五环外外地人','3009285817',1,'2013-07-30 07:29:57','2013-07-28 11:41:57',1,8);
 /*!40000 ALTER TABLE `platforminfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +106,7 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 /*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
-INSERT INTO `userinfo` VALUES (6,'3598702902','6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902','6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902','sandbox_cabbage200','2013-07-19 00:52:45','2013-07-20 00:52:46','2013-07-19 00:52:46'),(7,'70005592','62010152767e4506be26edace1e314480684a643648a3f070005592','620021582348f90983fe2cdfhca966dae7b5367e6c4e28170005592','cabbage200','2013-07-19 00:54:59','2013-07-20 00:56:15','2013-07-19 00:54:53'),(8,'64352291','6201413e4271dc056b658ZZ6553fefebc31553437ddc28264352291','6200713a4781912b420a8ZZec5c691d136b8fdfbeddbce764352291','jxzly229190','2013-07-28 10:55:34','2013-07-29 10:55:34','2013-07-28 10:55:34');
+INSERT INTO `userinfo` VALUES (6,'3598702902','6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902','6101925c77e6ac6b8ddaa3606de6fd7d21401fc18e51eb43598702902','sandbox_cabbage200','2013-07-19 00:52:45','2013-07-20 00:52:46','2013-07-19 00:52:46'),(7,'70005592','62010152767e4506be26edace1e314480684a643648a3f070005592','620021582348f90983fe2cdfhca966dae7b5367e6c4e28170005592','cabbage200','2013-07-19 00:54:59','2013-07-20 00:56:15','2013-07-19 00:54:53'),(8,'64352291','62000306f7495caaa15b742b7ef64c4a8709e2ZZ13ab8f864352291','6200c30d297dedc99b7cba2b102f3e06edec29ZZ9dcec8964352291','jxzly229190','2013-07-28 11:41:25','2013-07-29 11:41:25','2013-07-28 11:41:25');
 /*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,4 +123,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-28 11:18:22
+-- Dump completed on 2013-07-28 23:24:40
