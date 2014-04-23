@@ -52,7 +52,7 @@ namespace EasyWeibo.App.Controllers
 		    ws = new SinaWeiboService(weiboSessionKey);
 			if (ws.VerifyAccessToken() == TokenResult.Success)
 			{
-				ws.Send(new Model.WeiboMessage() { Content = content, Url=url });
+			    ws.Send(new Model.WeiboMessage() { Content = content, Url = url });
 				return View((object)"发送成功");
 			}
 			return View((object)"发送失败");
