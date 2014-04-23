@@ -6,13 +6,34 @@
     <edmx:StorageModels>
     <Schema Namespace="EasyadsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EasyadsModelStoreContainer">
+          <EntitySet Name="message" EntityType="EasyadsModel.Store.message" store:Type="Tables" Schema="easyads" />
           <EntitySet Name="platforminfo" EntityType="EasyadsModel.Store.platforminfo" store:Type="Tables" Schema="easyads" />
           <EntitySet Name="userinfo" EntityType="EasyadsModel.Store.userinfo" store:Type="Tables" Schema="easyads" />
+          <AssociationSet Name="FK_Message_UserInfo" Association="EasyadsModel.Store.FK_Message_UserInfo">
+            <End Role="userinfo" EntitySet="userinfo" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
           <AssociationSet Name="PK_UserId" Association="EasyadsModel.Store.PK_UserId">
             <End Role="userinfo" EntitySet="userinfo" />
             <End Role="platforminfo" EntitySet="platforminfo" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="uint" Nullable="false" />
+          <Property Name="PId" Type="uint" Nullable="false" />
+          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="2048" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="5000" />
+          <Property Name="VideoUrl" Type="varchar" MaxLength="2000" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6035: 关系“FK_Message_PlatFormInfo”在关系主端上有一些列不属于表的键的一部分。已排除了此关系。
+      -->
         <EntityType Name="platforminfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -22,7 +43,7 @@
           <Property Name="Refresh_token" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="Nick" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="PlatformUserId" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="Platform" Type="uint" Nullable="false" />
+          <Property Name="Platform" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="ExpireDate" Type="datetime" Nullable="false" />
           <Property Name="AuthDate" Type="datetime" Nullable="false" />
           <Property Name="ID" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
@@ -41,6 +62,18 @@
           <Property Name="ExpireTime" Type="datetime" Nullable="false" />
           <Property Name="AuthDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Message_UserInfo">
+          <End Role="userinfo" Type="EasyadsModel.Store.userinfo" Multiplicity="1" />
+          <End Role="message" Type="EasyadsModel.Store.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userinfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PK_UserId">
           <End Role="userinfo" Type="EasyadsModel.Store.userinfo" Multiplicity="1" />
           <End Role="platforminfo" Type="EasyadsModel.Store.platforminfo" Multiplicity="*" />
@@ -64,6 +97,11 @@
             <End Role="userinfo" EntitySet="userinfo" />
             <End Role="platforminfo" EntitySet="platforminfo" />
           </AssociationSet>
+          <EntitySet Name="message" EntityType="EasyadsModel.message" />
+          <AssociationSet Name="FK_Message_UserInfo" Association="EasyadsModel.FK_Message_UserInfo">
+            <End Role="userinfo" EntitySet="userinfo" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="platforminfo">
           <Key>
@@ -74,7 +112,7 @@
           <Property Type="String" Name="Refresh_token" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Nick" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="PlatformUserId" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Type="Int64" Name="Platform" Nullable="false" />
+          <Property Type="String" Name="Platform" Nullable="false" />
           <Property Type="DateTime" Name="ExpireDate" Nullable="false" />
           <Property Type="DateTime" Name="AuthDate" Nullable="false" />
           <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
@@ -94,6 +132,7 @@
           <Property Type="DateTime" Name="ExpireTime" Nullable="false" />
           <Property Type="DateTime" Name="AuthDate" Nullable="false" />
           <NavigationProperty Name="platforminfo" Relationship="EasyadsModel.PK_UserId" FromRole="userinfo" ToRole="platforminfo" />
+          <NavigationProperty Name="message" Relationship="EasyadsModel.FK_Message_UserInfo" FromRole="userinfo" ToRole="message" />
         </EntityType>
         <Association Name="PK_UserId">
           <End Type="EasyadsModel.userinfo" Role="userinfo" Multiplicity="1" />
@@ -103,6 +142,32 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="platforminfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="Int64" Name="PId" Nullable="false" />
+          <Property Type="String" Name="Message1" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PicUrl" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VideoUrl" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="userinfo" Relationship="EasyadsModel.FK_Message_UserInfo" FromRole="message" ToRole="userinfo" />
+        </EntityType>
+        <Association Name="FK_Message_UserInfo">
+          <End Type="EasyadsModel.userinfo" Role="userinfo" Multiplicity="1" />
+          <End Type="EasyadsModel.message" Role="message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userinfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="message">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -142,6 +207,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="message">
+            <EntityTypeMapping TypeName="EasyadsModel.message">
+              <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="Message1" ColumnName="Message" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -166,8 +245,14 @@
         <EntityTypeShape EntityType="EasyadsModel.platforminfo" Width="1.5" PointX="3" PointY="1" Height="2.9251310221354156" />
         <EntityTypeShape EntityType="EasyadsModel.userinfo" Width="1.5" PointX="0.75" PointY="1.125" Height="2.7341113281249996" />
         <AssociationConnector Association="EasyadsModel.PK_UserId" >
-          <ConnectorPoint PointX="2.25" PointY="2.4920556640625" />
-          <ConnectorPoint PointX="3" PointY="2.4920556640625" />
+          <ConnectorPoint PointX="2.25" PointY="2.5250655110677078" />
+          <ConnectorPoint PointX="3" PointY="2.5250655110677078" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="EasyadsModel.message" Width="1.5" PointX="3.375" PointY="4.625" Height="2.7341113281249996" />
+        <AssociationConnector Association="EasyadsModel.FK_Message_UserInfo" >
+          <ConnectorPoint PointX="2.25" PointY="4.0188810221354156" />
+          <ConnectorPoint PointX="4.71875" PointY="4.0188810221354156" />
+          <ConnectorPoint PointX="4.71875" PointY="4.625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

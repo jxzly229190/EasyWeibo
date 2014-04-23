@@ -16,7 +16,7 @@ namespace EasyWeibo.DAL
 			return GetEntities(info => info.Nick == nickName).ToList();
 		}
 
-		public platforminfo GetPlatFormInfoByNickNameAndPlatFormId(string nickName, int platformId)
+		public platforminfo GetPlatFormInfoByNickNameAndPlatFormId(string nickName, string platformId)
 		{
 			return GetEntities(info => info.Nick == nickName && info.Platform == platformId).FirstOrDefault();
 		}

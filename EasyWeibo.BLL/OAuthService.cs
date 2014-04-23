@@ -5,7 +5,11 @@ using Top.Api.Domain;
 
 namespace EasyWeibo.BLL
 {
-	public class OAuthService
+    using System.Linq;
+
+    using EasyWeibo.DAL;
+
+    public class OAuthService
 	{
 		public userinfo RegisterTaoBaoSession(OAuth2Base oa,string code)
 		{
@@ -65,7 +69,10 @@ namespace EasyWeibo.BLL
 			}
 		}
 
-
+	    public platforminfo GetPlatforminfoByUserID(int userId)
+	    {
+	        return new PlatFormInfoAccessor().GetEntities(e => e.UserId == userId).FirstOrDefault(p => p.UserId == userId);
+	    }
 
 		internal userinfo RegisterTaoBaoSession(OAuth2Base oa)
 		{

@@ -112,7 +112,7 @@ namespace EasyWeibo.BLL
 				platformInfo.Nick = user.Name;
 				platformInfo.PlatformUserId = user.ID;
 				platformInfo.UserId = userId;
-				platformInfo.Platform = (int) Helper.Mappings.PlatForm.SinaWeiBo; //新浪微博
+				platformInfo.Platform = Helper.Mappings.PlatForm.SinaWeiBo.ToString("G"); //新浪微博
 				platformInfo.SessionKey = oa.AccessToken;
 				platformInfo.AuthDate = DateTime.Now;
 				platformInfo.ExpireDate = oa.ExpireTime;

@@ -47,6 +47,7 @@ namespace EasyWeibo.App.Controllers
 					var userId = (long) Session["UID"];
 					var platformInfo = authService.RegisterPlatformSession(obDic[state], code, userId);
 					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = platformInfo.SessionKey;
+                    //从数据库取
 					break;
 				default:
 					break;

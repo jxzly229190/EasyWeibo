@@ -19,6 +19,7 @@ using System.Runtime.Serialization;
 #region EDM 关系源元数据
 
 [assembly: EdmRelationshipAttribute("EasyadsModel", "PK_UserId", "userinfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EasyWeibo.Model.userinfo), "platforminfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EasyWeibo.Model.platforminfo), true)]
+[assembly: EdmRelationshipAttribute("EasyadsModel", "FK_Message_UserInfo", "userinfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EasyWeibo.Model.userinfo), "message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EasyWeibo.Model.message), true)]
 
 #endregion
 
@@ -101,6 +102,22 @@ namespace EasyWeibo.Model
             }
         }
         private ObjectSet<userinfo> _userinfo;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<message> message
+        {
+            get
+            {
+                if ((_message == null))
+                {
+                    _message = base.CreateObjectSet<message>("message");
+                }
+                return _message;
+            }
+        }
+        private ObjectSet<message> _message;
 
         #endregion
         #region AddTo 方法
@@ -120,6 +137,14 @@ namespace EasyWeibo.Model
         {
             base.AddObject("userinfo", userinfo);
         }
+    
+        /// <summary>
+        /// 用于向 message EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddTomessage(message message)
+        {
+            base.AddObject("message", message);
+        }
 
         #endregion
     }
@@ -128,6 +153,276 @@ namespace EasyWeibo.Model
     #endregion
     
     #region 实体
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EasyadsModel", Name="message")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class message : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 message 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="userId">UserId 属性的初始值。</param>
+        /// <param name="pId">PId 属性的初始值。</param>
+        /// <param name="message1">Message1 属性的初始值。</param>
+        public static message Createmessage(global::System.Int64 id, global::System.Int64 userId, global::System.Int64 pId, global::System.String message1)
+        {
+            message message = new message();
+            message.ID = id;
+            message.UserId = userId;
+            message.PId = pId;
+            message.Message1 = message1;
+            return message;
+        }
+
+        #endregion
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int64 _ID;
+        partial void OnIDChanging(global::System.Int64 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int64 _UserId;
+        partial void OnUserIdChanging(global::System.Int64 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 PId
+        {
+            get
+            {
+                return _PId;
+            }
+            set
+            {
+                OnPIdChanging(value);
+                ReportPropertyChanging("PId");
+                _PId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PId");
+                OnPIdChanged();
+            }
+        }
+        private global::System.Int64 _PId;
+        partial void OnPIdChanging(global::System.Int64 value);
+        partial void OnPIdChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Message1
+        {
+            get
+            {
+                return _Message1;
+            }
+            set
+            {
+                OnMessage1Changing(value);
+                ReportPropertyChanging("Message1");
+                _Message1 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Message1");
+                OnMessage1Changed();
+            }
+        }
+        private global::System.String _Message1;
+        partial void OnMessage1Changing(global::System.String value);
+        partial void OnMessage1Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PicUrl
+        {
+            get
+            {
+                return _PicUrl;
+            }
+            set
+            {
+                OnPicUrlChanging(value);
+                ReportPropertyChanging("PicUrl");
+                _PicUrl = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PicUrl");
+                OnPicUrlChanged();
+            }
+        }
+        private global::System.String _PicUrl;
+        partial void OnPicUrlChanging(global::System.String value);
+        partial void OnPicUrlChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String VideoUrl
+        {
+            get
+            {
+                return _VideoUrl;
+            }
+            set
+            {
+                OnVideoUrlChanging(value);
+                ReportPropertyChanging("VideoUrl");
+                _VideoUrl = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("VideoUrl");
+                OnVideoUrlChanged();
+            }
+        }
+        private global::System.String _VideoUrl;
+        partial void OnVideoUrlChanging(global::System.String value);
+        partial void OnVideoUrlChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreatedDate;
+        partial void OnCreatedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+
+        #endregion
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EasyadsModel", "FK_Message_UserInfo", "userinfo")]
+        public userinfo userinfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("EasyadsModel.FK_Message_UserInfo", "userinfo").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("EasyadsModel.FK_Message_UserInfo", "userinfo").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<userinfo> userinfoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<userinfo>("EasyadsModel.FK_Message_UserInfo", "userinfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<userinfo>("EasyadsModel.FK_Message_UserInfo", "userinfo", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// 没有元数据文档可用。
@@ -151,7 +446,7 @@ namespace EasyWeibo.Model
         /// <param name="authDate">AuthDate 属性的初始值。</param>
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="userId">UserId 属性的初始值。</param>
-        public static platforminfo Createplatforminfo(global::System.String sessionKey, global::System.String refresh_token, global::System.String nick, global::System.String platformUserId, global::System.Int64 platform, global::System.DateTime expireDate, global::System.DateTime authDate, global::System.Int64 id, global::System.Int64 userId)
+        public static platforminfo Createplatforminfo(global::System.String sessionKey, global::System.String refresh_token, global::System.String nick, global::System.String platformUserId, global::System.String platform, global::System.DateTime expireDate, global::System.DateTime authDate, global::System.Int64 id, global::System.Int64 userId)
         {
             platforminfo platforminfo = new platforminfo();
             platforminfo.SessionKey = sessionKey;
@@ -270,7 +565,7 @@ namespace EasyWeibo.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 Platform
+        public global::System.String Platform
         {
             get
             {
@@ -280,13 +575,13 @@ namespace EasyWeibo.Model
             {
                 OnPlatformChanging(value);
                 ReportPropertyChanging("Platform");
-                _Platform = StructuralObject.SetValidValue(value);
+                _Platform = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Platform");
                 OnPlatformChanged();
             }
         }
-        private global::System.Int64 _Platform;
-        partial void OnPlatformChanging(global::System.Int64 value);
+        private global::System.String _Platform;
+        partial void OnPlatformChanging(global::System.String value);
         partial void OnPlatformChanged();
     
         /// <summary>
@@ -691,6 +986,28 @@ namespace EasyWeibo.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<platforminfo>("EasyadsModel.PK_UserId", "platforminfo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EasyadsModel", "FK_Message_UserInfo", "message")]
+        public EntityCollection<message> message
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<message>("EasyadsModel.FK_Message_UserInfo", "message");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<message>("EasyadsModel.FK_Message_UserInfo", "message", value);
                 }
             }
         }
