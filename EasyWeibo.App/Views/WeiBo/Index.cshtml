@@ -3,8 +3,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="post" action="SendWeibo">
-	<div>微薄正文：@Html.TextArea("content");</div>
-	<div>图片URL：@Html.TextBox("url")</div>
-	<input type="submit" value="发送"/>
-</form>
+<div style="width: 500px; text-align: center">
+    <h2>发送微博</h2>
+    <form class="form-horizontal" role="form" method="POST" action="/weibo/SendWeibo">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="content">内容：</label>
+            <div class="col-sm-10 input-group">
+                <span class="input-group-addon glyphicon glyphicon-align-left"></span>
+                <textarea class="form-control" rows="3" id="content" name="content" placeholder="微博内容"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="url">图片：</label>
+            <div class="col-sm-10 input-group">
+                <span class="input-group-addon glyphicon glyphicon-link"></span>
+                <input type="text" class="form-control" id="url" name="url" placeholder="图片"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">发送</button>
+                <button type="reset" class="btn btn-warning">重置</button>
+            </div>
+        </div>
+    </form>
+</div>

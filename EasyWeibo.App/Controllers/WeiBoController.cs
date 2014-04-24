@@ -30,13 +30,15 @@ namespace EasyWeibo.App.Controllers
 		    {
 		        if (Session["UID"] == null)
 		        {
-		            return this.Content("用户为空");
+		            ViewBag.ErrorMessage = "用户名为空";
+                    return this.View("ShowError");
 		        }
 		        var weiboPF = new OAuthService().GetPlatforminfoByUserID(int.Parse(Session["UID"].ToString()));
 
                 if (weiboPF == null)
                 {
-                    return this.Content("用户平台信息为空");
+                    ViewBag.ErrorMessage = "用户平台信息为空";
+                    return this.View("ShowError");
                 }
 
 		        weiboSessionKey = weiboPF.SessionKey;
@@ -45,7 +47,8 @@ namespace EasyWeibo.App.Controllers
 
 		        if (result != TokenResult.Success)
 		        {
-		            return this.Content("授权无效或已过期，请重新授权。");
+                    ViewBag.ErrorMessage = "授权无效或已过期，请重新授权。";
+                    return this.View("ShowError");
 		        }
 		    }
 
