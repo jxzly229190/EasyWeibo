@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonParas.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
@@ -194,6 +195,7 @@
     <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Setting\Index.cshtml" />
     <Content Include="Views\Shared\ShowError.cshtml" />
+    <Content Include="Views\Home\RequestOauth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

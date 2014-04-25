@@ -40,7 +40,7 @@ namespace EasyWeibo.BLL
 				{
 					_ServerList = new Dictionary<string, OAuth2Base>(StringComparer.OrdinalIgnoreCase);
 					_ServerList.Add(Mappings.PlatForm.SinaWeiBo.ToString(), new SinaWeiboOAuth2());//新浪微博
-					//_ServerList.Add(OAuthServer.QQ.ToString(), new QQOAuth());//QQ微博
+                    _ServerList.Add(Mappings.PlatForm.QQ.ToString(), new QQWeiboOAuth2());//QQ微博
 					_ServerList.Add(Mappings.PlatForm.TaoBao.ToString(), new TaoBaoOAuth2());//淘宝
 				}
 				return _ServerList;

@@ -1,0 +1,10 @@
+﻿@using EasyWeibo.App.Common
+@using EasyWeibo.BLL
+@{
+    ViewBag.Title = "应用授权";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>对不起，您尚未授权。去<a href="@Html.Raw(OAuth2Factory.TaoBaoAuther.OAuthUrl)">淘宝授权</a></h2>
+
+

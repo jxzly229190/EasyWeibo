@@ -20,10 +20,10 @@ namespace EasyWeibo.App.Controllers
 
 		//OAuth2Base ob = OAuth2Factory.TaoBaoAuther;
 
-		public ActionResult Index()
-		{
-			return View(obDic);
-		}
+	    public ActionResult Index()
+	    {
+	        return this.View(obDic);
+	    }
 
 		[HttpGet]
 		public ViewResult GetAccessToken(string code, string state)
@@ -32,7 +32,9 @@ namespace EasyWeibo.App.Controllers
 			string sessionKey = string.Empty;
 
 			OAuth2Model authinfo;
-			switch (obDic[state].Server)
+		    long userId;
+		    platforminfo platformInfo;
+		    switch (obDic[state].Server)
 			{
 				case Mappings.PlatForm.TaoBao:
 
@@ -44,16 +46,22 @@ namespace EasyWeibo.App.Controllers
 					Session[Helper.PlatformSessionKeyHelper.TaobaoSessionKeyName] = sessionKey;
 					break;
 				case Mappings.PlatForm.SinaWeiBo:
-					var userId = (long) Session["UID"];
-					var platformInfo = authService.RegisterPlatformSession(obDic[state], code, userId);
+					userId = (long) this.Session["UID"];
+					platformInfo = authService.RegisterPlatformSession(this.obDic[state], code, userId);
 					Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName] = platformInfo.SessionKey;
                     //从数据库取
 					break;
+                case Mappings.PlatForm.QQ:
+                    userId = (long)this.Session["UID"];
+                    platformInfo = authService.RegisterPlatformSession(this.obDic[state], code, userId);
+                    Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = platformInfo.SessionKey;
+                    //从数据库取
+                    break;
 				default:
 					break;
 			}
 
-			return View();
+		    return View();
 		}
 	}
 }

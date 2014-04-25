@@ -35,6 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyDlls\NetDimension.Weibo.dll</HintPath>
     </Reference>
+    <Reference Include="QWeiboSDK">
+      <HintPath>..\ThirdPartyDlls\QWeiboSDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -52,9 +55,11 @@
   <ItemGroup>
     <Compile Include="Auths\OAuth2Base.cs" />
     <Compile Include="Auths\OAuth2Factory.cs" />
+    <Compile Include="Auths\QQWeiboOAuth2.cs" />
     <Compile Include="Auths\SinaWeiboOAuth2.cs" />
     <Compile Include="Auths\TaoBaoOAuth2.cs" />
     <Compile Include="CustomException\WeiboException.cs" />
+    <Compile Include="QQWeiboService.cs" />
     <Compile Include="TaobaoService.cs" />
     <Compile Include="WeiboServiceBase.cs" />
     <Compile Include="OAuthService.cs" />

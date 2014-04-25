@@ -8,11 +8,24 @@ namespace EasyWeibo.App.Controllers
 {
 	public class HomeController : Controller
 	{
-		public ActionResult Index()
-		{
-			return View();
-		}
+        protected ActionResult Index()
+        {
+            if (Session["UID"] == null)
+            {
+                return this.View("RequestOauth");
+            }
+            return View();
+        }
 
+        [HttpGet]
+        public ActionResult Index(string code, string state)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return this.Index();
+            }
 
+            return this.RedirectToAction("GetAccessToken","OAuth");
+        }
 	}
 }

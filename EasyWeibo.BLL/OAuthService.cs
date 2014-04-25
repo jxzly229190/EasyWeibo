@@ -36,6 +36,8 @@ namespace EasyWeibo.BLL
 				{
 					case Mappings.PlatForm.SinaWeiBo:
 						return this.RegisterSinaWeiboPlatform(oa, UID);
+                    case Mappings.PlatForm.QQ:
+                        return this.(oa, UID);
 					default:
 						return null;
 				}
@@ -44,6 +46,30 @@ namespace EasyWeibo.BLL
 				throw new NullReferenceException("oa 为null");
 			throw new Exception("认证失败");
 		}
+
+        public platforminfo RegisterQQWeiboPlatform(OAuth2Base oa, long userId)
+        {
+            if (oa != null && !string.IsNullOrEmpty(oa.AccessToken))
+            {
+                var service = new QQWeiboService();
+                var platformInfo = service.GetPlatformBySessionKey(oa.AccessToken);
+
+                if (platformInfo != null)
+                {
+                    platformInfo.AuthDate = DateTime.Now;
+                    platformInfo.ExpireDate = oa.ExpireTime;
+                    platformInfo.Refresh_token = "";
+                    service.(platformInfo);
+                    return platformInfo;
+                }
+
+                return service.SavePlatforminfo(oa, userId);
+            }
+            else
+            {
+                throw new NullReferenceException("Auth2SinaWeibo 对象为空");
+            }
+        }
 
 		public platforminfo RegisterSinaWeiboPlatform(OAuth2Base oa, long userId)
 		{
