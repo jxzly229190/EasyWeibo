@@ -72,8 +72,8 @@ namespace EasyWeibo.BLL
                 throw new NullReferenceException("Auth2QQWeibo 对象为空");
             }
         }
-
-		public platforminfo RegisterSinaWeiboPlatform(OAuth2Base oa, long userId)
+        
+        public platforminfo RegisterSinaWeiboPlatform(OAuth2Base oa, long userId)
 		{
 			if (oa != null&&!string.IsNullOrEmpty(oa.AccessToken))
 			{
