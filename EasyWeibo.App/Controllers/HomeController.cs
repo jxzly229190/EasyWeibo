@@ -10,6 +10,8 @@ namespace EasyWeibo.App.Controllers
 	{
         protected ActionResult Index()
         {
+            if (Session["UID"] == null)
+            {
                 return this.View("RequestOauth");
             }
             return View();
@@ -24,6 +26,7 @@ namespace EasyWeibo.App.Controllers
             }
 
             return this.RedirectToAction("GetAccessToken","OAuth");
+
         }
 	}
 }
