@@ -9,22 +9,40 @@
 
         public override string PlatformUId
         {
-            get { return Helper.StringParserHelper.GetJosnValue(TokenResultJson, "name"); }
+            get { return Helper.StringParserHelper.QueryString(TokenResultJson, "name"); }
         }
 
         public override string AccessToken
         {
-            get { return Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "access_token"); }
+            get { return Helper.StringParserHelper.QueryString(this.TokenResultJson, "access_token"); }
+        }
+
+        public string OpenID
+        {
+            get { return Helper.StringParserHelper.QueryString(this.TokenResultJson, "openid"); }
+        }
+
+        public string Nick
+        {
+            get { return Helper.StringParserHelper.QueryString(this.TokenResultJson, "nick"); }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return Helper.StringParserHelper.QueryString(this.TokenResultJson, "name");
+            }
         }
 
         public override string RefreshToken
         {
-            get { return Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "refresh_token");}
+            get { return Helper.StringParserHelper.QueryString(this.TokenResultJson, "refresh_token"); }
         }
 
         public override System.DateTime ExpireTime
         {
-            get { return DateTime.Now.AddMilliseconds(Int32.Parse(Helper.StringParserHelper.GetJosnValue(this.TokenResultJson, "expires_in"))); }
+            get { return DateTime.Now.AddMilliseconds(Int32.Parse(Helper.StringParserHelper.QueryString(this.TokenResultJson, "expires_in"))); }
         }
 
         public override Helper.Mappings.PlatForm Server

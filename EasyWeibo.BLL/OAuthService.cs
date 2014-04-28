@@ -37,7 +37,7 @@ namespace EasyWeibo.BLL
 					case Mappings.PlatForm.SinaWeiBo:
 						return this.RegisterSinaWeiboPlatform(oa, UID);
                     case Mappings.PlatForm.QQ:
-                        return this.(oa, UID);
+				        return this.RegisterQQWeiboPlatform(oa, UID);
 					default:
 						return null;
 				}
@@ -51,7 +51,8 @@ namespace EasyWeibo.BLL
         {
             if (oa != null && !string.IsNullOrEmpty(oa.AccessToken))
             {
-                var service = new QQWeiboService();
+                var qqOa = oa as QQWeiboOAuth2;
+                var service = new QQWeiboService(oa.AppKey, oa.AppSecret, oa.AccessToken, qqOa.OpenID);
                 var platformInfo = service.GetPlatformBySessionKey(oa.AccessToken);
 
                 if (platformInfo != null)
@@ -59,7 +60,8 @@ namespace EasyWeibo.BLL
                     platformInfo.AuthDate = DateTime.Now;
                     platformInfo.ExpireDate = oa.ExpireTime;
                     platformInfo.Refresh_token = "";
-                    service.(platformInfo);
+                    platformInfo.Platform = Mappings.PlatForm.QQWeiBo.ToString("G");
+                    service.UpdateQQWeiboInfo(platformInfo);
                     return platformInfo;
                 }
 
@@ -67,7 +69,7 @@ namespace EasyWeibo.BLL
             }
             else
             {
-                throw new NullReferenceException("Auth2SinaWeibo 对象为空");
+                throw new NullReferenceException("Auth2QQWeibo 对象为空");
             }
         }
 
@@ -83,6 +85,7 @@ namespace EasyWeibo.BLL
 					platformInfo.AuthDate = DateTime.Now;
 					platformInfo.ExpireDate = oa.ExpireTime;
 					platformInfo.Refresh_token = "";
+                    platformInfo.Platform = Mappings.PlatForm.SinaWeiBo.ToString("G");
 					service.UpdateWeiboInfo(platformInfo);
 					return platformInfo;
 				}
@@ -142,8 +145,5 @@ namespace EasyWeibo.BLL
 			}
 			return info;
 		}
-
-		
 	}
-
 }

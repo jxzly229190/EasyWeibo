@@ -3,16 +3,25 @@
     using System;
 
     using EasyWeibo.DAL;
+    using EasyWeibo.Helper;
     using EasyWeibo.Model;
 
     using NetDimension.Weibo;
+
+    using QWeiboSDK;
 
     public class QQWeiboService:WeiboServiceBase
     {
         private PlatFormInfoAccessor accessor;
 
-        public QQWeiboService()
+        private QWeiboSDK.Oauthkey2 oauthKey;
+
+        public QQWeiboService(string appKey,string appSecret,string tokenKey,string openId)
         {
+            oauthKey = new Oauthkey2(appKey, appSecret);
+            oauthKey.tokenKey = tokenKey;
+            oauthKey.openId = openId;
+            //oauthKey.tokenSecret = accessSecret;
             accessor = new PlatFormInfoAccessor();
         }
 
@@ -31,29 +40,31 @@
             return accessor.GetPlatFormInfoBySessionKey(key);
         }
 
-        public void UpdateWeiboInfo(platforminfo info)
+        public void UpdateQQWeiboInfo(platforminfo info)
         {
             accessor.UpdateEntity(info);
         }
 
         public platforminfo SavePlatforminfo(OAuth2Base oa, long userId)
         {
-            platforminfo platformInfo;
-            platformInfo = new platforminfo();
-            var user = this.sinaClient.API.Entity.Users.Show(oa.PlatformUId);
-            if (user != null)
+            platforminfo platformInfo = new platforminfo();
+            var userJson = new user(oauthKey, "json").info();
+            if (string.IsNullOrWhiteSpace(userJson)
+                || (!string.IsNullOrWhiteSpace(Helper.StringParserHelper.GetJosnValue(userJson, "errcode "))
+                    && Helper.StringParserHelper.GetJosnValue(userJson, "errcode ") != "0"))
             {
-                platformInfo.Nick = user.Name;
-                platformInfo.PlatformUserId = user.ID;
-                platformInfo.UserId = userId;
-                platformInfo.Platform = Helper.Mappings.PlatForm.SinaWeiBo.ToString("G"); //新浪微博
-                platformInfo.SessionKey = oa.AccessToken;
-                platformInfo.AuthDate = DateTime.Now;
-                platformInfo.ExpireDate = oa.ExpireTime;
-                platformInfo.Refresh_token = sinaClient.OAuth.RefreshToken;
-                return accessor.AddEntity(platformInfo); //保存
+                throw new ArgumentNullException("获取用户信息失败");
             }
-            return null;
+
+            platformInfo.Nick = Helper.StringParserHelper.GetJosnValue(userJson, "nick");
+            platformInfo.PlatformUserId = Helper.StringParserHelper.GetJosnValue(userJson, "name");
+            platformInfo.UserId = userId;
+            platformInfo.Platform = Helper.Mappings.PlatForm.QQWeiBo.ToString("G"); //新浪微博
+            platformInfo.SessionKey = oa.AccessToken;
+            platformInfo.AuthDate = DateTime.Now;
+            platformInfo.ExpireDate = oa.ExpireTime;
+            platformInfo.Refresh_token = oa.RefreshToken;
+            return accessor.AddEntity(platformInfo); //保存
         }
 
         public override NetDimension.Weibo.TokenResult VerifyAccessToken()
@@ -61,9 +72,9 @@
             throw new System.NotImplementedException();
         }
 
-        public override void SavePlatformInfo(Model.platforminfo entity)
+        public override void SavePlatformInfo(platforminfo entity)
         {
-            throw new System.NotImplementedException();
+            this.accessor.AddOrUpdatePlatFormInfo(entity);
         }
     }
 }

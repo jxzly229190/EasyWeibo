@@ -36,11 +36,11 @@ namespace EasyWeibo.BLL
 		/// <returns></returns>
 		public abstract TokenResult VerifyAccessToken();
 
-		/// <summary>
-		/// 保存平台信息
-		/// </summary>
-		/// <param name="entity"></param>
-		public abstract void SavePlatformInfo(platforminfo entity);
+	    /// <summary>
+	    /// 保存平台信息
+	    /// </summary>
+	    /// <param name="entity"></param>
+        public abstract void SavePlatformInfo(platforminfo entity);
 	}
 
 	/// <summary>
