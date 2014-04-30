@@ -6,6 +6,7 @@ using Top.Api.Domain;
 namespace EasyWeibo.BLL
 {
     using System.Linq;
+    using System.Linq.Expressions;
 
     using EasyWeibo.DAL;
 
@@ -60,6 +61,7 @@ namespace EasyWeibo.BLL
                     platformInfo.AuthDate = DateTime.Now;
                     platformInfo.ExpireDate = oa.ExpireTime;
                     platformInfo.Refresh_token = "";
+                    platformInfo.OpenId = qqOa.OpenID;
                     platformInfo.Platform = Mappings.PlatForm.QQWeiBo.ToString("G");
                     service.UpdateQQWeiboInfo(platformInfo);
                     return platformInfo;
@@ -102,6 +104,11 @@ namespace EasyWeibo.BLL
 	    {
 	        return new PlatFormInfoAccessor().GetEntities(e => e.UserId == userId).FirstOrDefault(p => p.UserId == userId);
 	    }
+
+        public platforminfo QueryPlatforminfo(Expression<Func<platforminfo, bool>> selector)
+        {
+            return new PlatFormInfoAccessor().GetEntities(selector).FirstOrDefault();
+        }
 
 		internal userinfo RegisterTaoBaoSession(OAuth2Base oa)
 		{

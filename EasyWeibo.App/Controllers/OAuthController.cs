@@ -55,6 +55,7 @@ namespace EasyWeibo.App.Controllers
                     userId = (long)this.Session["UID"];
                     platformInfo = authService.RegisterPlatformSession(this.obDic[state], code, userId);
                     Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName] = platformInfo.SessionKey;
+			        Session[Helper.PlatformSessionKeyHelper.QQOpenID] = (this.obDic[state] as QQWeiboOAuth2).OpenID;
                     //从数据库取
                     break;
 				default:

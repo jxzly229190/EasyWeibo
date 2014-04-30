@@ -9,6 +9,7 @@ namespace EasyWeibo.Helper
 	{
 		public const string SinaWeiboSessionKeyName = "SinaSessionkey";
 		public const string QQSessionKeyName = "QQSessionkey";
+        public const string QQOpenID = "QQSessionOpenID";
 		public const string TaobaoSessionKeyName = "TOPSessionkey";
 
 	}

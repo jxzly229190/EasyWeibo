@@ -2,6 +2,7 @@
 {
     using System;
 
+    using EasyWeibo.BLL.CustomException;
     using EasyWeibo.DAL;
     using EasyWeibo.Helper;
     using EasyWeibo.Model;
@@ -27,7 +28,20 @@
 
         public override void Send(Model.WeiboMessage message)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var t = new t(oauthKey, "Json");
+                var result = t.add(message.Content, "127.0.0.1", "", "");
+                if (string.IsNullOrWhiteSpace(result) || Helper.StringParserHelper.GetJosnValue(result, "errcode") != "0")
+                {
+                    throw new SendWeiboException(Helper.StringParserHelper.GetJosnValue(result, "msg"));
+                }
+
+            }
+            catch (Exception exception)
+            {
+                throw new SendWeiboException(exception.Message);
+            }
         }
 
         public override void BatchSend(System.Collections.Generic.List<Model.WeiboMessage> msgList)
@@ -62,6 +76,7 @@
             platformInfo.Platform = Helper.Mappings.PlatForm.QQWeiBo.ToString("G"); //新浪微博
             platformInfo.SessionKey = oa.AccessToken;
             platformInfo.AuthDate = DateTime.Now;
+            platformInfo.OpenId = (oa as QQWeiboOAuth2).OpenID;
             platformInfo.ExpireDate = oa.ExpireTime;
             platformInfo.Refresh_token = oa.RefreshToken;
             return accessor.AddEntity(platformInfo); //保存

@@ -8,6 +8,8 @@ using NetDimension.Weibo;
 namespace EasyWeibo.App.Controllers
 {
     using EasyWeibo.BLL;
+    using EasyWeibo.Helper;
+    using EasyWeibo.Model;
 
     public class WeiBoController : Controller
     {
@@ -22,47 +24,111 @@ namespace EasyWeibo.App.Controllers
 			return View();
         }
 
-		public ActionResult SendWeibo(string content, string url, string session)
+		public ActionResult SendWeibo(string content, string url, string[] platform)
 		{
-		    var weiboSessionKeyObj = Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName];
-		    string weiboSessionKey = null;
-		    if (weiboSessionKeyObj == null)
+		    try
 		    {
-		        if (Session["UID"] == null)
+		        if (platform.Contains("S"))
 		        {
-		            ViewBag.ErrorMessage = "用户名为空";
-		            return this.View("ShowError");
-		        }
-		        var weiboPF = new OAuthService().GetPlatforminfoByUserID(int.Parse(Session["UID"].ToString()));
-
-		        if (weiboPF == null)
-		        {
-		            ViewBag.ErrorMessage = "用户平台信息为空";
-		            return this.View("ShowError");
+		            this.SendSinaWeibo(content, url);
 		        }
 
-		        var result = new SinaWeiboService(weiboPF.SessionKey).VerifyAccessToken();
-
-		        if (result != TokenResult.Success)
+		        if (platform.Contains("Q"))
 		        {
-		            ViewBag.ErrorMessage = "授权无效或已过期，请重新授权。";
-		            return this.View("ShowError");
+		            this.SendQQWeibo(content, url);
 		        }
 
-		        weiboSessionKey = weiboPF.SessionKey;
+		        return this.View();
 		    }
-		    else
+		    catch (Exception exception)
 		    {
-		        weiboSessionKey = weiboSessionKeyObj.ToString();
+		        ViewBag.ErrorMessage = exception.Message;
+                return this.View("ShowError");
 		    }
-
-		    ws = new SinaWeiboService(weiboSessionKey);
-			if (ws.VerifyAccessToken() == TokenResult.Success)
-			{
-			    ws.Send(new Model.WeiboMessage() { Content = content, Url = url });
-				return View((object)"发送成功");
-			}
-			return View((object)"发送失败");
 		}
+
+        private void SendQQWeibo(string content, string url)
+        {
+            string openId = "";
+            var weiboSessionKeyObj = Session[Helper.PlatformSessionKeyHelper.QQSessionKeyName];
+            string weiboSessionKey = null;
+            if (weiboSessionKeyObj == null)
+            {
+                if (Session["UID"] == null)
+                {
+                    throw new Exception("用户名为空");
+                }
+
+                int uid = int.Parse(Session["UID"].ToString());
+                var pName = Mappings.PlatForm.QQWeiBo.ToString("G");
+                var weiboPF = new OAuthService().QueryPlatforminfo(p => p.UserId == uid && p.Platform == pName);
+
+                if (weiboPF == null)
+                {
+                    throw new Exception("用户平台信息为空");
+                }
+
+                if (weiboPF.ExpireDate <= DateTime.Now)
+                {
+                    throw new Exception("授权无效或已过期，请重新授权。");
+                }
+
+                weiboSessionKey = weiboPF.SessionKey;
+                openId = weiboPF.OpenId;
+            }
+            else
+            {
+                weiboSessionKey = weiboSessionKeyObj.ToString();
+                openId = Session[PlatformSessionKeyHelper.QQOpenID].ToString();
+            }
+
+            ws = new QQWeiboService(
+                StringParserHelper.GetConfig(Mappings.PlatForm.QQ.ToString("G") + ".AppKey"),
+                StringParserHelper.GetConfig(Mappings.PlatForm.QQ.ToString("G") + ".AppSercet"),
+                weiboSessionKey,
+                openId);
+
+            ws.Send(new Model.WeiboMessage { Content = content, Url = url });
+        }
+
+        private void SendSinaWeibo(string content, string url)
+        {
+            var weiboSessionKeyObj = Session[Helper.PlatformSessionKeyHelper.SinaWeiboSessionKeyName];
+            string weiboSessionKey = null;
+            if (weiboSessionKeyObj == null)
+            {
+                if (Session["UID"] == null)
+                {
+                    throw new Exception("用户名为空");
+                }
+                int uid = int.Parse(Session["UID"].ToString());
+                var pName = Mappings.PlatForm.SinaWeiBo.ToString("G");
+                var weiboPF = new OAuthService().QueryPlatforminfo(p => p.UserId == uid && p.Platform == pName);
+
+                if (weiboPF == null)
+                {
+                    //ViewBag.ErrorMessage = "用户平台信息为空";
+                    //return this.View("ShowError");
+                    throw new Exception("用户平台信息为空");
+                }
+
+                var result = new SinaWeiboService(weiboPF.SessionKey).VerifyAccessToken();
+
+                if (result != TokenResult.Success)
+                {
+                    throw new Exception("授权无效或已过期，请重新授权。");
+                }
+
+                weiboSessionKey = weiboPF.SessionKey;
+            }
+            else
+            {
+                weiboSessionKey = weiboSessionKeyObj.ToString();
+            }
+
+            ws = new SinaWeiboService(weiboSessionKey);
+            ws.Send(new Model.WeiboMessage() { Content = content, Url = url });
+
+        }
     }
 }

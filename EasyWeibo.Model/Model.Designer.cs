@@ -685,6 +685,30 @@ namespace EasyWeibo.Model
         private global::System.Int64 _UserId;
         partial void OnUserIdChanging(global::System.Int64 value);
         partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String OpenId
+        {
+            get
+            {
+                return _OpenId;
+            }
+            set
+            {
+                OnOpenIdChanging(value);
+                ReportPropertyChanging("OpenId");
+                _OpenId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("OpenId");
+                OnOpenIdChanged();
+            }
+        }
+        private global::System.String _OpenId;
+        partial void OnOpenIdChanging(global::System.String value);
+        partial void OnOpenIdChanged();
 
         #endregion
     
@@ -963,6 +987,30 @@ namespace EasyWeibo.Model
         private global::System.DateTime _AuthDate;
         partial void OnAuthDateChanging(global::System.DateTime value);
         partial void OnAuthDateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String OpenId
+        {
+            get
+            {
+                return _OpenId;
+            }
+            set
+            {
+                OnOpenIdChanging(value);
+                ReportPropertyChanging("OpenId");
+                _OpenId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("OpenId");
+                OnOpenIdChanged();
+            }
+        }
+        private global::System.String _OpenId;
+        partial void OnOpenIdChanging(global::System.String value);
+        partial void OnOpenIdChanged();
 
         #endregion
     

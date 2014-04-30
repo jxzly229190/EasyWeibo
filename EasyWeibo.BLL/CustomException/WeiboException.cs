@@ -13,6 +13,10 @@ namespace EasyWeibo.BLL.CustomException
 
 	public class SendWeiboException : Exception
 	{
+	    public SendWeiboException(string message = "")
+	    {
+	        this.Message = message;
+	    }
 		public string Message { set; get; }
 	}
 
