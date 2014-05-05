@@ -44,7 +44,7 @@ namespace EasyWeibo.App.Controllers
 
             try
             {
-                var message = new message()
+                var message = new message
                 {
                     UserId = int.Parse(Session["UID"].ToString()),
                     CreatedDate = DateTime.Now,
