@@ -38,6 +38,7 @@
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data.Entity, Version=6.6.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="NetDimension.Weibo, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyDlls\NetDimension.Weibo.dll</HintPath>
@@ -71,9 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\CommonParas.cs" />
+    <Compile Include="Controllers\EventTaskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\TimeTaskController.cs" />
     <Compile Include="Controllers\WeiBoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +202,8 @@
     <Content Include="Views\Home\RequestOauth.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\EventTask\Index.cshtml" />
+    <Content Include="Views\TimeTask\Index.cshtml" />
+    <Content Include="Views\Message\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

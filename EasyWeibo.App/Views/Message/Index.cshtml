@@ -1,5 +1,39 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@using EasyWeibo.Model
+@model IList<EasyWeibo.Model.message>
+
+@{
+    ViewBag.Title = "信息模板";
 }
 
-<h2>Index</h2>
+@{
+    if (Model != null && Model.Count > 0)
+    {
+        <a class="btn btn-primary" href="/Message/Add">添加模板</a>
+        <br/>
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>UserID</th>
+                    <th>Message</th>
+                    <th>PicUrl</th>
+                    <th>VideoUrl</th>
+                    <th>ModifiedDate</th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.UserId</td>
+                <td>@message.Message1</td>
+                <td>@message.PicUrl</td>
+                <td>@message.VideoUrl</td>
+                <td>@message.ModifiedDate</td>
+            </tr>
+        }
+        </tbody>
+        </table>
+    }
+    
+    <a class="btn btn-primary" href="/Message/Add">添加模板</a>
+}

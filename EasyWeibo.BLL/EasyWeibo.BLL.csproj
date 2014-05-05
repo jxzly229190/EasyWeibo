@@ -59,6 +59,7 @@
     <Compile Include="Auths\SinaWeiboOAuth2.cs" />
     <Compile Include="Auths\TaoBaoOAuth2.cs" />
     <Compile Include="CustomException\WeiboException.cs" />
+    <Compile Include="MessageService.cs" />
     <Compile Include="QQWeiboService.cs" />
     <Compile Include="TaobaoService.cs" />
     <Compile Include="WeiboServiceBase.cs" />

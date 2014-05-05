@@ -24,16 +24,13 @@
           </Key>
           <Property Name="ID" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="uint" Nullable="false" />
-          <Property Name="PId" Type="uint" Nullable="false" />
+          <Property Name="PId" Type="uint" />
           <Property Name="Message" Type="varchar" Nullable="false" MaxLength="2048" />
           <Property Name="PicUrl" Type="varchar" MaxLength="5000" />
           <Property Name="VideoUrl" Type="varchar" MaxLength="2000" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
-        <!--生成过程中发现错误:
-      警告 6035: 关系“FK_Message_PlatFormInfo”在关系主端上有一些列不属于表的键的一部分。已排除了此关系。
-      -->
         <EntityType Name="platforminfo">
           <Key>
             <PropertyRef Name="ID" />
