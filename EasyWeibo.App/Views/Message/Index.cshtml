@@ -13,11 +13,12 @@
         <table class="table table-hover table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>UserID</th>
-                    <th>Message</th>
-                    <th>PicUrl</th>
-                    <th>VideoUrl</th>
-                    <th>ModifiedDate</th>
+                    <th>用户编号</th>
+                    <th>信息内容</th>
+                    <th>图片地址</th>
+                    <th>视频地址</th>
+                    <th>修改时间</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,8 @@
                 <td>@message.PicUrl</td>
                 <td>@message.VideoUrl</td>
                 <td>@message.ModifiedDate</td>
+                <td><a href="/Message/Edit?id=@Html.Raw(message.ID.ToString())" class="btn btn-info">修改</a>
+                <a href="/Message/Remove?id=@Html.Raw(message.ID.ToString())" class="btn btn-warning">删除</a></td>
             </tr>
         }
         </tbody>

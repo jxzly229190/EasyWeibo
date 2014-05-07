@@ -64,5 +64,86 @@ namespace EasyWeibo.App.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            if (id <= 0)
+            {
+                ViewBag.ErrorMessage = "消息编码错误";
+                return this.View("ShowError");
+            }
+
+            var message = new MessageService().Single(id);
+
+            return this.View(message);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, string content, string url)
+        {
+            if (id <= 0)
+            {
+                ViewBag.ErrorMessage = "消息编码错误";
+                return this.View("ShowError");
+            }
+
+            try
+            {
+                var service = new MessageService();
+                var originalMsg = service.Single(id);
+
+                if (originalMsg == null)
+                {
+                    ViewBag.ErrorMessage = "消息编码错误";
+                    return this.View("ShowError");
+                }
+
+                originalMsg.Message1 = content;
+                originalMsg.PicUrl = url;
+
+                service.Update(originalMsg);
+
+                return this.RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorMessage = exception.InnerException;
+                return this.View("ShowError");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Remove(int id)
+        {
+            if (id <= 0)
+            {
+                ViewBag.ErrorMessage = "消息编码错误";
+                return this.View("ShowError");
+            }
+
+            try
+            {
+                var service = new MessageService();
+                var originalMsg = service.Single(id);
+
+                if (originalMsg == null)
+                {
+                    ViewBag.ErrorMessage = "消息编码错误";
+                    return this.View("ShowError");
+                }
+
+                originalMsg.State = 127;
+
+                service.Update(originalMsg);
+
+                return this.RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorMessage = exception.InnerException;
+                return this.View("ShowError");
+            }
+        }
     }
 }

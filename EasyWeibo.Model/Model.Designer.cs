@@ -378,6 +378,30 @@ namespace EasyWeibo.Model
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.SByte> State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private Nullable<global::System.SByte> _State;
+        partial void OnStateChanging(Nullable<global::System.SByte> value);
+        partial void OnStateChanged();
 
         #endregion
     

@@ -30,6 +30,7 @@
           <Property Name="VideoUrl" Type="varchar" MaxLength="2000" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="State" Type="tinyint" />
         </EntityType>
         <EntityType Name="platforminfo">
           <Key>
@@ -160,6 +161,7 @@
           <Property Type="DateTime" Name="CreatedDate" />
           <Property Type="DateTime" Name="ModifiedDate" />
           <NavigationProperty Name="userinfo" Relationship="EasyadsModel.FK_Message_UserInfo" FromRole="message" ToRole="userinfo" />
+          <Property Type="SByte" Name="State" />
         </EntityType>
         <Association Name="FK_Message_UserInfo">
           <End Type="EasyadsModel.userinfo" Role="userinfo" Multiplicity="1" />
@@ -213,6 +215,7 @@
           <EntitySetMapping Name="message">
             <EntityTypeMapping TypeName="EasyadsModel.message">
               <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
